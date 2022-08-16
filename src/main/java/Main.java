@@ -1,5 +1,4 @@
 import com.example.IndexMenu;
-import com.example.patient.model.dao.PatientDao;
 
 import java.sql.*;
 
