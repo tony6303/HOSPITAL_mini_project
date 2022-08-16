@@ -10,6 +10,8 @@ import java.util.List;
 
 import com.example.product.model.dto.Product;
 
+import static com.example.config.JdbcTemplate.getConnection;
+
 /**
  * @author tony6(이대엽)
  *
@@ -19,15 +21,6 @@ import com.example.product.model.dto.Product;
 // DAO : Data Access Object , 데이터에 접근하는 객체
 // sql, DB와 관련된 코드들만 작성한다. DB에 직접 접근하는 객체이다.
 public class ProductDao {
-
-	private Connection getConnection() throws SQLException {
-
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
-		String username = "HOSPITAL";
-		String password = "HOSPITAL";
-
-		return DriverManager.getConnection(url, username, password);
-	}
 
 	public List<Product> findAll() {
 

@@ -7,15 +7,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.config.JdbcTemplate.getConnection;
+
 public class PatientDao {
-
-    public Connection getConnection() throws SQLException {
-        String url = "jdbc:oracle:thin:@localhost:1521:XE";
-        String username = "ehek01";
-        String password = "ehek12";
-
-        return DriverManager.getConnection(url, username, password);
-    }
 
     /**
      * @author : 임종현
