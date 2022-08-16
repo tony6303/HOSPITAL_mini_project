@@ -54,9 +54,12 @@ public class PatientMenu {
         System.out.println("===== 예약 정보 확인 =====");
         System.out.print("예약자 주민번호 입력 : ");
         String resNo = sc.next();
-
+        
+        // error
         Reservation reservation = pc.findReservation(resNo); // request
+        
         Patient patient = pc.findPatient(resNo);
+        
         if (patient == null) {
             System.out.println("환자 정보가 존재하지 않습니다");
             return;
