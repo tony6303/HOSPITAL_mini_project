@@ -97,10 +97,10 @@ public class CashierMenu {
 		System.out.print("주민번호를 입력하세요 : ");
 		sc.nextLine();
 		String resNo = sc.nextLine();
-		List<Patient> resNoCheck = cc.checkResNo(resNo);
+		Patient resNoCheck = cc.checkResNo(resNo);
 		
 		
-		if(resNoCheck.isEmpty()) {
+		if(resNoCheck == null) {
 			System.out.println("조회되지 않는 환자입니다");
 		}else {
 			int result = cc.registerReservation(resNo);

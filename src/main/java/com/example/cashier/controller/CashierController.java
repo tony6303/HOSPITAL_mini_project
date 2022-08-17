@@ -27,7 +27,7 @@ public class CashierController {
 		return cashierService.salaryselect(salary);
 	}
 
-	public List<Patient> checkResNo(String resNo) {
+	public Patient checkResNo(String resNo) {
 		return cashierService.selectByResNo(resNo);
 	}
 	

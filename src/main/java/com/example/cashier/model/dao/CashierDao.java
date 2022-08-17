@@ -113,7 +113,9 @@ public class CashierDao {
 		}
 	}
 
-	public List<Patient> selectByResNo(String resNo) {
+	public Patient selectByResNo(String resNo) {
+		Patient patient = null;
+		
 		String sql = "SELECT * "
 				+	 "FROM PATIENT "
 				+	 "WHERE PATIENT_NO = ?";
@@ -121,16 +123,13 @@ public class CashierDao {
 		try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
 			pstmt.setString(1, resNo);
 			ResultSet rset = pstmt.executeQuery();
-			List<Patient> list = new ArrayList<>();
-//			Patient p = new Patient();
-//			
-//			while(rset.next()) {
-//				list.add(new Patient(p.getPatientId(), resNo , p.getPatientName(), p.getPhone()));
-//			}
+			if (rset.next()) {
+                patient = new Patient(rset.getLong(1), rset.getString(2), rset.getString(3), rset.getString(4));
+            }
 			
 			rset.close();
 			
-			return list;
+			return patient;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}

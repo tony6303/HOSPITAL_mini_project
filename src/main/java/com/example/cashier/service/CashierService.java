@@ -36,7 +36,7 @@ public class CashierService {
 
 
 
-	public List<Patient> selectByResNo(String resNo) {
+	public Patient selectByResNo(String resNo) {
 		return cashierDao.selectByResNo(resNo);
 	}
 	
