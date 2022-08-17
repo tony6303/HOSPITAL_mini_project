@@ -1,4 +1,4 @@
-package main.java.com.example.funeralDirector.model.dao;
+package com.example.funeralDirector.model.dao;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import main.java.com.example.funeralDirector.model.dto.FunelralDto;
+import com.example.funeralDirector.model.dto.FunelralDto;
 
 
 public class FunelralDao {

@@ -1,4 +1,4 @@
-package main.java.com.example.funeralDirector.model.dto;
+package com.example.funeralDirector.model.dto;
 
 import java.util.Date;
 

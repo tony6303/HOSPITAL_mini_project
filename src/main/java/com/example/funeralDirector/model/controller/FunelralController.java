@@ -1,8 +1,8 @@
-package main.java.com.example.funeralDirector.model.controller;
+package com.example.funeralDirector.model.controller;
 
-import main.java.com.example.funeralDirector.model.dto.FunelralDto;
-import main.java.com.example.funeralDirector.service.FunelralService;
-import main.java.com.example.funeralDirector.view.FuneralDirectorMenu;
+import com.example.funeralDirector.model.dto.FunelralDto;
+import com.example.funeralDirector.service.FunelralService;
+import com.example.funeralDirector.view.FuneralDirectorMenu;
 
 public class FunelralController {
 	// 컨트롤러 -> 서비스 -> dao -> db

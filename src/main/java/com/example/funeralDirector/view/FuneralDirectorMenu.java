@@ -1,15 +1,15 @@
-package main.java.com.example.funeralDirector.view;
+package com.example.funeralDirector.view;
 
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import main.java.com.example.funeralDirector.model.controller.FunelralController;
-import main.java.com.example.funeralDirector.model.controller.SubsidyController;
-import main.java.com.example.funeralDirector.model.dao.SubsidyDao;
-import main.java.com.example.funeralDirector.model.dto.FunelralDto;
-import main.java.com.example.funeralDirector.model.dto.SubsidyDto;
+import com.example.funeralDirector.model.controller.FunelralController;
+import com.example.funeralDirector.model.controller.SubsidyController;
+import com.example.funeralDirector.model.dao.SubsidyDao;
+import com.example.funeralDirector.model.dto.FunelralDto;
+import com.example.funeralDirector.model.dto.SubsidyDto;
 
 public class FuneralDirectorMenu {
 	public Scanner s = new Scanner(System.in);
@@ -92,6 +92,8 @@ public class FuneralDirectorMenu {
 			System.out.println();
 			System.out.println("4.부조금 삭제");
 			System.out.println();
+			System.out.println("5.사망자별 부조금 조회");
+			System.out.println();
 			System.out.println("메뉴 번호를 선택하세요");
 			int numu3num = s.nextInt();
 			switch (numu3num) {
@@ -106,6 +108,9 @@ public class FuneralDirectorMenu {
 				break;
 			case 4:
 				deleteDeath();
+				break;
+			case 5:
+				selectBypatient();
 				break;
 			case 0:
 				return;
@@ -182,9 +187,34 @@ public class FuneralDirectorMenu {
 			//System.out.println(list.get(i).getClass());
 		}
 	}
+	// 4.환자 이름별 부조금 총 조회
+		public void selectBypatient() {
+			System.out.println("환자 이름를 입력하세요");
+			String name = s.next();
+			
+			ArrayList<SubsidyDto> list;
+			list = sdc.selectBypatient(name);
+			System.out.println("");
+//			for (SubsidyDto sd : list) {
+//				System.out.println("=======부조금 총 조회======");
+//				System.out.println(sd);
+//			}
+			
+			for(int i = 0;i<list.size();i++) {
+				System.out.println(list.get(i).getSubsidyName());
+				System.out.println(list.get(i).getSubsidy());
+				System.out.println(list.get(i).getAccount_number());
+				System.out.println(list.get(i).getAccount_bank());
+				System.out.println(list.get(i).getFunelral_id());
+				//System.out.println(list.get(i).getClass());
+			}
+		}
+	
+	
 
 	// 2.부조금 삽입
 	public void InsertSubsidyList() {
+		
 		System.out.println("부조한 사람의 이름을 입력하세요");
 		String insertyname = s.next();
 		System.out.println("부조한 금액을 입력하세요");
@@ -193,14 +223,17 @@ public class FuneralDirectorMenu {
 		String insertAccountInfo = s.next();
 		System.out.println("입금 된 은행를 입력하세요");
 		String insertAccountBank = s.next();
+		System.out.println("환자 아이디를  입력하세요");
+		int insertPatient = s.nextInt();
 
-		SubsidyDto subsidyDto = new SubsidyDto(insertyname, insertprice, insertAccountInfo, insertAccountBank);
+		SubsidyDto subsidyDto = new SubsidyDto(insertyname, insertprice, insertAccountInfo, insertAccountBank,insertPatient);
 		System.out.println("부조금 정보가 추가 되었습니다");
 		
 
 		sdc.registerSubsidy(subsidyDto);
 		System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 		System.out.println("┃"+insertyname);
+		System.out.println("┃"+insertPatient);
 		System.out.println(insertprice);
 		System.out.println(insertAccountInfo);
 		System.out.println(insertAccountBank);

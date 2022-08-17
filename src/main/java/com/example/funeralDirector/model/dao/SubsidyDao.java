@@ -1,4 +1,4 @@
-package main.java.com.example.funeralDirector.model.dao;
+package com.example.funeralDirector.model.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,8 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import main.java.com.example.funeralDirector.model.dto.FunelralDto;
-import main.java.com.example.funeralDirector.model.dto.SubsidyDto;
+import com.example.funeralDirector.model.dto.FunelralDto;
+import com.example.funeralDirector.model.dto.SubsidyDto;
 
 public class SubsidyDao {
 	
@@ -54,12 +54,42 @@ public class SubsidyDao {
 		//부조금 전체 정보 조회 끝
 		
 		
+		//환자이름 별 부조금 전체 정보 조회 
+				public ArrayList<SubsidyDto> selectBypatient(String patient_name){
+					String sql = "SELECT SUBSIDY_NAME, SUBSIDY, ACCOUNT_INFO, ACCOUNT_BANK ,A.FUNELRAL_ID FROM SUBSIDY A LEFT JOIN FUNELRAL B ON A.FUNELRAL_ID = B.FUNELRAL_ID LEFT JOIN PATIENT C ON B.FUNELRAL_ID = C.PATIENT_ID WHERE C.PATIENT_NAME = ? ";
+					//전체 조회할 꺼니깐 dto형태의 arrayList를 선언해야겠지!
+					ArrayList<SubsidyDto> list = new ArrayList<>();
+					
+					try (PreparedStatement pstmt = getConnection().prepareStatement(sql)){
+						pstmt.setString(1,patient_name);
+						
+						ResultSet rset = pstmt.executeQuery();
+						System.out.println(rset);
+						while(rset.next()) {
+							SubsidyDto sd = new SubsidyDto();
+							sd.setSubsidyName(rset.getString(1));
+							sd.setSubsidy(rset.getInt(2));
+							sd.setAccount_number(rset.getString(3));
+							sd.setAccount_bank(rset.getString(4));
+							sd.setFunelral_id(rset.getInt(5));
+							
+							list.add(sd);
+						}
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					return list;
+				}
+				//환자이름 별 부조금 전체 정보 조회  끝
+		
+		
 		//부조금 추가 
 		public int insert(SubsidyDto subsidyDto) {
 			
 			//sql문 삽입해야지?
 			
-			String sql = "INSERT INTO SUBSIDY(SUBSIDY_NAME, SUBSIDY, ACCOUNT_INFO, ACCOUNT_BANK) VALUES(?,?,?,?)";
+			String sql = "INSERT INTO SUBSIDY(SUBSIDY_NAME, SUBSIDY, ACCOUNT_INFO, ACCOUNT_BANK, FUNELRAL_ID) VALUES(?,?,?,?,?)";
 			
 			try {
 				Connection connection = getConnection();
@@ -68,6 +98,7 @@ public class SubsidyDao {
 				pstmt.setInt(2,subsidyDto.getSubsidy());
 				pstmt.setString(3,subsidyDto.getAccount_number());
 				pstmt.setString(4,subsidyDto.getAccount_bank());
+				pstmt.setInt(5,subsidyDto.getFunelral_id());
 				
 				return pstmt.executeUpdate();
 			} catch (SQLException e) {

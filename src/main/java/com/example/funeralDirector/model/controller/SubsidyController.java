@@ -1,9 +1,9 @@
-package main.java.com.example.funeralDirector.model.controller;
+package com.example.funeralDirector.model.controller;
 
 import java.util.ArrayList;
 
-import main.java.com.example.funeralDirector.model.dto.SubsidyDto;
-import main.java.com.example.funeralDirector.service.SubsidyService;
+import com.example.funeralDirector.model.dto.SubsidyDto;
+import com.example.funeralDirector.service.SubsidyService;
 
 public class SubsidyController {
 	//부조금 서비스 객체 선언해줘야 쓸 수 있지!!!
@@ -12,6 +12,11 @@ public class SubsidyController {
 	//객체 선언한걸로 부조금 체크 가져와 !!
 	public ArrayList<SubsidyDto> selectSubsidy() {
 		return subsidyService.checkSubsidy();
+	}
+	
+	//환자 이름별 조회 
+	public ArrayList<SubsidyDto> selectBypatient(String patient_name) {
+		return subsidyService.selectBypatient(patient_name);
 	}
 	
 	//부조금 추가 컨트롤러 intsert

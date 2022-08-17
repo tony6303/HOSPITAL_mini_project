@@ -1,10 +1,10 @@
-package main.java.com.example.funeralDirector.service;
+package com.example.funeralDirector.service;
 
 import java.util.ArrayList;
 
-import main.java.com.example.funeralDirector.model.dao.FunelralDao;
-import main.java.com.example.funeralDirector.model.dto.FunelralDto;
-import main.java.com.example.funeralDirector.view.FuneralDirectorMenu;
+import com.example.funeralDirector.model.dao.FunelralDao;
+import com.example.funeralDirector.model.dto.FunelralDto;
+import com.example.funeralDirector.view.FuneralDirectorMenu;
 
 public class FunelralService {
 	FunelralDao funelralDao = new FunelralDao();
