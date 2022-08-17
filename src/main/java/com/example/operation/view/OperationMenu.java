@@ -96,7 +96,7 @@ public class OperationMenu {
 			sc.nextLine();
 			String patientName = sc.nextLine();
 			List<OperationDTO> orr = oc.searchOp(patientName);
-			orr.toString();
-			
+			for(int i = 0;i<orr.size();i++) 
+			System.out.println(orr.get(i).toString());
 		}
 	}
