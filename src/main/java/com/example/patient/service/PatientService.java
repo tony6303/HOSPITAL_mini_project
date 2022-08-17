@@ -26,12 +26,6 @@ public class PatientService {
      * @return : 환자주민번호에 해당하는 예약객체
      */
     public Reservation checkReservation(String resNo) {
-        Patient patient = patientDao.findByPatientNo(resNo);
-        if (patient == null) {
-            System.out.println("log : 등록된 환자가 없습니다.");
-            return null;
-        }
-
         return patientDao.findReservationByPatientNo(resNo);
     }
 

@@ -59,7 +59,7 @@ public class PatientMenu {
         System.out.print("예약자 주민번호 입력 : ");
         String resNo = sc.next();
 
-        Patient patient = pc.findPatient(resNo);
+        Patient patient = pc.findPatient(resNo); // 환자정보 조회1
         if (patient == null) {
             System.out.println("환자 정보가 존재하지 않습니다");
             return;
