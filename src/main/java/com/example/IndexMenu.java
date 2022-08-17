@@ -2,17 +2,28 @@ package com.example;
 
 import java.util.Scanner;
 
+<<<<<<< HEAD
 import com.example.doctor.view.DoctorMenu;
 import com.example.patient.view.PatientMenu;
 //import com.example.product.controller.ProductController;
 //import com.example.product.view.ProductMenu;
+=======
+import com.example.medic.view.MedicMenu;
+import com.example.patient.view.PatientMenu;
+import com.example.product.view.ProductMenu;
+>>>>>>> develop
 
 public class IndexMenu {
     private final Scanner sc = new Scanner(System.in);
     private final PatientMenu pm = new PatientMenu();
+<<<<<<< HEAD
 //    private final ProductMenu prom = new ProductMenu();
     private final DoctorMenu dm = new DoctorMenu();
 //    private final ProductMenu prom = new ProductMenu();
+=======
+    private final MedicMenu mm = new MedicMenu();
+    private final ProductMenu prom = new ProductMenu();
+>>>>>>> develop
 
     public void mainMenu() {
         while (true) {
@@ -21,7 +32,7 @@ public class IndexMenu {
             int menu = sc.nextInt();
             switch (menu) {
                 case 1:
-                    break;
+                	mm.main();
                 case 2:
                 	dm.main();
                     break;
