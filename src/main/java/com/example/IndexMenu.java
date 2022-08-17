@@ -2,6 +2,7 @@ package com.example;
 
 import java.util.Scanner;
 
+import com.example.doctor.view.DoctorMenu;
 import com.example.patient.view.PatientMenu;
 //import com.example.product.controller.ProductController;
 //import com.example.product.view.ProductMenu;
@@ -10,7 +11,7 @@ public class IndexMenu {
     private final Scanner sc = new Scanner(System.in);
     private final PatientMenu pm = new PatientMenu();
 //    private final ProductMenu prom = new ProductMenu();
-    
+    private final DoctorMenu dm = new DoctorMenu();
 //    private final ProductMenu prom = new ProductMenu();
 
     public void mainMenu() {
@@ -22,6 +23,7 @@ public class IndexMenu {
                 case 1:
                     break;
                 case 2:
+                	dm.main();
                     break;
                 case 3:
                     break;
