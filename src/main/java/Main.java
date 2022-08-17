@@ -1,10 +1,11 @@
 import com.example.IndexMenu;
+import com.example.utils.AsciiArtUtils;
 
 import java.sql.*;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
-        System.out.println("delete test");
+        AsciiArtUtils.show("src/main/resources/test.txt");
         IndexMenu menu = new IndexMenu();
         menu.mainMenu();
     }
