@@ -11,12 +11,20 @@ import java.util.Scanner;
 public class PatientService {
     PatientDao patientDao = new PatientDao();
 
-    // 환자 등록
+    /**
+     * 환자 등록
+     * @param patient : 환자객체
+     * @return : 환자등록 성공시 1 실패시 0
+     */
     public int createPatient(Patient patient) {
         return patientDao.insert(patient);
     }
 
-    // 예약 확인
+    /**
+     * 예약 확인
+     * @param resNo : 주민번호
+     * @return : 환자주민번호에 해당하는 예약객체
+     */
     public Reservation checkReservation(String resNo) {
         Patient patient = patientDao.findByPatientNo(resNo);
         if (patient == null) {
@@ -49,13 +57,18 @@ public class PatientService {
     }
 
     /**
+     * 환자 조회
      * @param resNo : 환자 주민번호
-     * @return
+     * @return : 입력받은 주민번호에 대한 환자객체
      */
     public Patient findPatientByPatientNo(String resNo) {
         return patientDao.findByPatientNo(resNo);
     }
 
+    /**
+     * 환자리스트 조회
+     * @return : 환자 리스트
+     */
     public List<Patient> findAll() {
         return patientDao.findAll();
     }
