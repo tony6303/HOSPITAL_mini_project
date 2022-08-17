@@ -44,7 +44,7 @@ public class OperationMenu {
 			System.out.print("환자의 이름을 입력하세요 : ");
 			sc.nextLine();
 			String patientName = sc.nextLine();
-			System.out.print("삭제할 날짜를 입력하세요 : ");
+			System.out.print("삭제할 날짜를 입력하세요 : ex(1997-05-29 01:30:22)");
 			String date = sc.nextLine();
 			
 			int result = oc.deletOp(patientName,date);
@@ -59,9 +59,9 @@ public class OperationMenu {
 			System.out.print("환자의 이름을 입력하세요: ");
 			sc.nextLine();
 			String patientName = sc.nextLine();
-			System.out.print("수정할 날짜를 입력하세요 : ");
+			System.out.print("수정할 날짜를 입력하세요 : ex(1997-05-29 01:30:22)");
 			String date = sc.nextLine();
-			System.out.print("바뀐 수술 날짜를 입력하세요 : ");
+			System.out.print("바뀐 수술 날짜를 입력하세요 : ex(1997-05-29 01:30:22)");
 			String newDate = sc.nextLine();
 			int result = oc.updateOp(patientName,date,newDate);
 			if(result>0) {
