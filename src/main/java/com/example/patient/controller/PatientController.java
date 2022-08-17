@@ -4,6 +4,8 @@ import com.example.patient.model.dto.Patient;
 import com.example.patient.model.dto.Reservation;
 import com.example.patient.service.PatientService;
 
+import java.util.List;
+
 public class PatientController {
     private final PatientService patientService = new PatientService();
 
@@ -22,5 +24,9 @@ public class PatientController {
 
     public Patient findPatient(String resNo) {
         return patientService.findPatientByPatientNo(resNo);
+    }
+
+    public List<Patient> findPatientList() {
+        return patientService.findAll();
     }
 }

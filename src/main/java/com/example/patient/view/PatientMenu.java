@@ -4,6 +4,7 @@ import com.example.patient.controller.PatientController;
 import com.example.patient.model.dto.Patient;
 import com.example.patient.model.dto.Reservation;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class PatientMenu {
@@ -13,7 +14,7 @@ public class PatientMenu {
     public void main() {
         while (true) {
             System.out.print("*** 환자 페이지 ***\n1. 환자 정보 등록\n2. 예약 정보 확인\n3. 예약 취소" +
-                    "\n0. 뒤로가기\n메뉴 번호 선택 : ");
+                    "\n4. 환자 리스트 출력\n0. 뒤로가기\n메뉴 번호 선택 : ");
             int menu = sc.nextInt();
             switch (menu) {
                 case 1:
@@ -24,6 +25,9 @@ public class PatientMenu {
                     break;
                 case 3:
                     cancelReversion();
+                    break;
+                case 4:
+                    showPatientList();
                     break;
                 case 0:
                     System.out.println("프로그램 종료");
@@ -54,17 +58,14 @@ public class PatientMenu {
         System.out.println("===== 예약 정보 확인 =====");
         System.out.print("예약자 주민번호 입력 : ");
         String resNo = sc.next();
-        
-        // error
-        Reservation reservation = pc.findReservation(resNo); // request
-        
+
         Patient patient = pc.findPatient(resNo);
-        
         if (patient == null) {
             System.out.println("환자 정보가 존재하지 않습니다");
             return;
         }
 
+        Reservation reservation = pc.findReservation(resNo); // request
         if (reservation == null) {
             System.out.println(patient.getPatientName() + "님 예약정보가 존재하지 않습니다.");
             return; // 메서드 종료
@@ -90,5 +91,14 @@ public class PatientMenu {
 
         // response
         System.out.println("환자정보 등록이 완료되었습니다.");
+    }
+
+    private void showPatientList() {
+        System.out.println("===== 환자 리스트 확인 =====");
+        List<Patient> patientList = pc.findPatientList();
+        for (Patient patient : patientList) {
+            System.out.println("환자번호 : " + patient.getPatientNo() + ", 이름 : " + patient.getPatientName() + ", 주민번호 : "
+                    + patient.getPatientNo() + ", 연락처 : " + patient.getPhone());
+        }
     }
 }

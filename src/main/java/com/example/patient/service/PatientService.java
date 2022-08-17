@@ -5,6 +5,7 @@ import com.example.patient.model.dto.Patient;
 import com.example.patient.model.dto.Reservation;
 
 import java.sql.PreparedStatement;
+import java.util.List;
 import java.util.Scanner;
 
 public class PatientService {
@@ -19,7 +20,7 @@ public class PatientService {
     public Reservation checkReservation(String resNo) {
         Patient patient = patientDao.findByPatientNo(resNo);
         if (patient == null) {
-            System.out.println("log warning : 등록된 환자가 없습니다.");
+            System.out.println("log : 등록된 환자가 없습니다.");
             return null;
         }
 
@@ -53,5 +54,9 @@ public class PatientService {
      */
     public Patient findPatientByPatientNo(String resNo) {
         return patientDao.findByPatientNo(resNo);
+    }
+
+    public List<Patient> findAll() {
+        return patientDao.findAll();
     }
 }
