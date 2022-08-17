@@ -5,6 +5,8 @@ public class Patient {
     private final String patientNo;
     private final String patientName;
     private final String phone;
+    
+    
 
     public Patient(Long patientId, String patientNo, String patientName, String phone) {
         this.patientId = patientId;

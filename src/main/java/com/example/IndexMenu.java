@@ -6,6 +6,7 @@ import com.example.doctor.view.DoctorMenu;
 import com.example.patient.view.PatientMenu;
 import com.example.medic.view.MedicMenu;
 import com.example.product.view.ProductMenu;
+import com.example.cashier.view.CashierMenu;
 
 public class IndexMenu {
     private final Scanner sc = new Scanner(System.in);
@@ -13,6 +14,7 @@ public class IndexMenu {
     private final DoctorMenu dm = new DoctorMenu();
     private final MedicMenu mm = new MedicMenu();
     private final ProductMenu prom = new ProductMenu();
+    private final CashierMenu cm = new CashierMenu();
 
     public void mainMenu() {
         while (true) {
@@ -26,6 +28,7 @@ public class IndexMenu {
                 	dm.main();
                     break;
                 case 3:
+                	cm.main();
                     break;
                 case 4:
                 	prom.main();
