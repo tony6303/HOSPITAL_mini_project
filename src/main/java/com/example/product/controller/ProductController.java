@@ -16,20 +16,20 @@ public class ProductController { // 딱 서비스만 호출하고 끝
 	private final ProductService productService = new ProductService();
 
 	public List<Product> selectAllProduct() {
-		return productService.findAllProduct();
+		return productService.findAllProduct(); // select 의 결과를 List 형으로 반환
 
 	} // selectAllProduct 끝
 
 	public int addProduct(Product product) {
 
-		return productService.addProduct(product); // 성공시 1 실패시 0 반환
+		return productService.addProduct(product);  // 성공시 성공한 행의개수(1이상) 실패시 0 반환
 	} // insertProduct 끝
 
 	public int modifyProduct(int pId, int amount) {
-		return productService.modifyProduct(pId, amount);
+		return productService.modifyProduct(pId, amount); // 성공시 성공한 행의개수(1이상) 실패시 0 반환
 	} // modifyProduct 끝
 
 	public int deleteProduct(int pId) {
-		return productService.deleteProduct(pId);
+		return productService.deleteProduct(pId); // 성공시 성공한 행의개수(1이상) 실패시 0 반환
 	} // deleteProduct 끝
 }

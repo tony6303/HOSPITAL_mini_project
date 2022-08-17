@@ -17,22 +17,22 @@ public class ProductService {
 	ProductDao productDao = new ProductDao();
 
 	public List<Product> findAllProduct() {
-		List<Product> list = productDao.findAll();
+		List<Product> list = productDao.findAll();// select 의 결과를 List 형으로 반환
 		return list;
 	} // findAllProduct 끝
 
 	public int addProduct(Product product) {
-		int result = productDao.insert(product); // 성공시 1 실패시 0 반환
+		int result = productDao.insert(product);  // 성공시 성공한 행의개수(1이상) 실패시 0 반환
 		return result;
 	} // addProduct 끝
 
 	public int modifyProduct(int pId, int amount) {
-		int result = productDao.update(pId, amount);
+		int result = productDao.update(pId, amount); // 성공시 성공한 행의개수(1이상) 실패시 0 반환
 		return result;
 	} // modifyProduct 끝
 
 	public int deleteProduct(int pId) {
-		return productDao.delete(pId);
+		return productDao.delete(pId); // 성공시 성공한 행의개수(1이상) 실패시 0 반환
 	} // deleteProduct 끝
 
 }

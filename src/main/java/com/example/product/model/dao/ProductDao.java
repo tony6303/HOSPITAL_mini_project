@@ -33,7 +33,7 @@ public class ProductDao {
 		ResultSet rs = null; // SELECT 후 결과값 받아올 객체
 
 		String sql = "SELECT * FROM PRO_MANAGE";
-
+		// pstmt = 쿼리를 실행하는 객체
 		try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
 			List<Product> list = new ArrayList<>();
 
@@ -75,6 +75,7 @@ public class ProductDao {
 		String sql = "UPDATE PRO_MANAGE SET AMOUNT = ? WHERE P_ID = ?";
 
 		try {
+			// pstmt = 쿼리를 실행하는 객체
 			PreparedStatement pstmt = getConnection().prepareStatement(sql);
 			pstmt.setInt(1, amount);
 			pstmt.setInt(2, pId);
@@ -92,6 +93,7 @@ public class ProductDao {
 		String sql = "DELETE FROM PRO_MANAGE WHERE P_ID = ?";
 
 		try {
+			// pstmt = 쿼리를 실행하는 객체
 			PreparedStatement pstmt = getConnection().prepareStatement(sql);
 			pstmt.setInt(1, pId);
 

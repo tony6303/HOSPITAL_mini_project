@@ -56,7 +56,7 @@ public class ProductMenu {
 		System.out.println("삭제할 제품의 아이디를 입력하세요");
 		int deleteId = sc.nextInt();
 
-		int result = proControll.deleteProduct(deleteId);
+		int result = proControll.deleteProduct(deleteId); // 컨트롤러 떄리기
 		if (result > 0) {
 			System.out.println("삭제가 완료 되었습니다.");
 		} else {
@@ -72,7 +72,7 @@ public class ProductMenu {
 		System.out.println("수정할 수량을 입력하세요");
 		int modifyAmount = sc.nextInt();
 
-		int result = proControll.modifyProduct(modifyId, modifyAmount);
+		int result = proControll.modifyProduct(modifyId, modifyAmount); // 컨트롤러 떄리기
 		if (result > 0) {
 			System.out.println("수정이 완료되었습니다.");
 		} else {
@@ -82,7 +82,7 @@ public class ProductMenu {
 	} // modifyProduct 끝
 
 	private void selectAllProduct() {
-		List<Product> list = proControll.selectAllProduct();
+		List<Product> list = proControll.selectAllProduct(); // 컨트롤러 떄리기
 		if (list.isEmpty()) {
 			System.out.println("조회된 재고가 없습니다");
 		} else {
@@ -100,7 +100,7 @@ public class ProductMenu {
 		Product product = new Product(name, amount); // pId 와 receiveDate 는 자동으로 생성하게 만들어놔서 2개값만 받도록 함
 
 		// request
-		int result = proControll.addProduct(product);
+		int result = proControll.addProduct(product); // 컨트롤러 떄리기
 
 		// response
 		if (result == 1) {
