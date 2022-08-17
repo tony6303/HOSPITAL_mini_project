@@ -3,6 +3,7 @@ package com.example;
 import java.util.Scanner;
 
 import com.example.doctor.view.DoctorMenu;
+import com.example.funeralDirector.view.FuneralDirectorMenu;
 import com.example.patient.view.PatientMenu;
 import com.example.medic.view.MedicMenu;
 import com.example.product.view.ProductMenu;
@@ -15,6 +16,7 @@ public class IndexMenu {
     private final MedicMenu mm = new MedicMenu();
     private final ProductMenu prom = new ProductMenu();
     private final CashierMenu cm = new CashierMenu();
+    private final FuneralDirectorMenu fdm = new FuneralDirectorMenu();
 
     public void mainMenu() {
         while (true) {
@@ -37,6 +39,7 @@ public class IndexMenu {
                     pm.main();
                     break;
                 case 6:
+                	fdm.main();
                     break;
                 case 0:
                     System.out.println("프로그램 종료");
