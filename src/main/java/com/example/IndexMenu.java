@@ -2,11 +2,13 @@ package com.example;
 
 import java.util.Scanner;
 
+import com.example.medic.view.MedicMenu;
 import com.example.patient.view.PatientMenu;
 
 public class IndexMenu {
     private final Scanner sc = new Scanner(System.in);
     private final PatientMenu pm = new PatientMenu();
+    private final MedicMenu mm = new MedicMenu();
     
 //    private final ProductMenu prom = new ProductMenu();
 
@@ -17,7 +19,7 @@ public class IndexMenu {
             int menu = sc.nextInt();
             switch (menu) {
                 case 1:
-                    break;
+                	mm.main();
                 case 2:
                     break;
                 case 3:
