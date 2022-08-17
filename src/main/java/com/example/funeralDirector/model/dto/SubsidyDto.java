@@ -1,8 +1,8 @@
-package com.example.funeralDirector.model.dto;
+package main.java.com.example.funeralDirector.model.dto;
 
 import java.util.List;
 
-import com.example.funeralDirector.model.dao.SubsidyDao;
+import main.java.com.example.funeralDirector.model.dao.SubsidyDao;
 
 public class SubsidyDto {
 	private String SubsidyName; 

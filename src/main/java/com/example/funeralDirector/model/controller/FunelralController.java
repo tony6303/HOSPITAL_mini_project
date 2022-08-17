@@ -31,7 +31,6 @@ public class FunelralController {
 	//총 사망자 검색
 	public void selectAll() {
 		funelralService.checkDeath();
-		//System.out.println("======================");
 	}
 	
 //	//업데이트 

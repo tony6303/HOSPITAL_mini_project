@@ -11,6 +11,7 @@ import com.example.funeralDirector.model.dao.SubsidyDao;
 import com.example.funeralDirector.model.dto.FunelralDto;
 import com.example.funeralDirector.model.dto.SubsidyDto;
 
+/** @author fla90*/
 public class FuneralDirectorMenu {
 	public Scanner s = new Scanner(System.in);
 	private final FunelralController fc = new FunelralController();
@@ -123,13 +124,8 @@ public class FuneralDirectorMenu {
 	}
 	// 이전페이지 메뉴
 
-	// 사망자 명단 전체 정보 조회
-	public void DeathList(List<FunelralDto> list) {
-		System.out.println("사망자 명단 전체 정보조회");
-		for (FunelralDto m : list) {
-			System.out.println("사망자 정보" + m);
-		}
-	}
+	
+	
 	//사망자 추가 
 	private void inputDeathAdd() {
 		System.out.print("추가할 사망자 아이디을 입력하세요");
@@ -144,77 +140,77 @@ public class FuneralDirectorMenu {
 
 	// 사용자 아이디로 명단 하나 조회
 	private void inputDeathinfo() {
+		System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 		System.out.print("사망자의 이름 입력:");
 		String patientName = s.next();	
 		System.out.print("사망자의 주민번호 입력:");
 		String patientNo = s.next();
+		System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 		
 		FunelralDto funelralDto = fc.selectOne(patientName, patientNo);
-		System.out.println(funelralDto.getFunelralId());
-		System.out.println(funelralDto.getDateDeath());
-		System.out.println(funelralDto.getDeathReason());
-		System.out.println(funelralDto.getPatientId());
+		
+		System.out.println("사망자 아이디 : "+funelralDto.getFunelralId());
+		System.out.println("사망 날짜 : "+funelralDto.getDateDeath());
+		System.out.println("사망 사유 : "+funelralDto.getDeathReason());
+		System.out.println("환자 아이디 : "+funelralDto.getPatientId());
 	}
-	// public void DeathOne
+	
+	
+	//사망자 명단 3.사망자 명단 총 조회()
+		public void DeathList(List<FunelralDto> list) {
+			System.out.println("사망자 명단 전체 정보조회");
+			for (FunelralDto m : list) {
+				//System.out.println("사망자 정보" + m);
+				System.out.println("");
+				
+				System.out.println("사망자 정보 : " + m.getPatientName()+"      "+m.getDateDeath()+"      "+m.getDeathReason()+"      ");
+				
+			}
+		}
+	
+		
+		
 
 	// 에러뜰 때
 	public void DeathError(String message) {
 		System.out.println("너 사망자 부분 요청 실패함" + message);
 	}
 
+	
+	
 	// 보조금 부분 에러뜰 때
 	public void SubsidyError(String message) {
 		System.out.println("너 부조금 부분 실패함" + message);
 	}
 
-	// 부조금
-	// 1.부조금 총 조회
+	
+	//부조금 관리  1.부조금 총 조회
 	public void SubsidyList() {
 		ArrayList<SubsidyDto> list;
 		list = sdc.selectSubsidy();
 		System.out.println("");
-//		for (SubsidyDto sd : list) {
-//			System.out.println("=======부조금 총 조회======");
-//			System.out.println(sd);
-//		}
-		
+
 		for(int i = 0;i<list.size();i++) {
-			System.out.println(list.get(i).getSubsidyName());
-			System.out.println(list.get(i).getSubsidy());
-			System.out.println(list.get(i).getAccount_number());
-			System.out.println(list.get(i).getAccount_bank());
+			System.out.println("부조금 총 조회 "+(i+1));
+			System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+			System.out.println("부조한 사람 : "+list.get(i).getSubsidyName());
+			System.out.println("부조한 금액 : "+list.get(i).getSubsidy());
+			System.out.println("계좌 번호 : "+list.get(i).getAccount_number());
+			System.out.println("계좌 은행 : "+list.get(i).getAccount_bank());
+			System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+			System.out.println();
 
 			//System.out.println(list.get(i).getClass());
 		}
 	}
-	// 4.환자 이름별 부조금 총 조회
-		public void selectBypatient() {
-			System.out.println("환자 이름를 입력하세요");
-			String name = s.next();
-			
-			ArrayList<SubsidyDto> list;
-			list = sdc.selectBypatient(name);
-			System.out.println("");
-//			for (SubsidyDto sd : list) {
-//				System.out.println("=======부조금 총 조회======");
-//				System.out.println(sd);
-//			}
-			
-			for(int i = 0;i<list.size();i++) {
-				System.out.println(list.get(i).getSubsidyName());
-				System.out.println(list.get(i).getSubsidy());
-				System.out.println(list.get(i).getAccount_number());
-				System.out.println(list.get(i).getAccount_bank());
-				System.out.println(list.get(i).getFunelral_id());
-				//System.out.println(list.get(i).getClass());
-			}
-		}
+	
 	
 	
 
-	// 2.부조금 삽입
+	//부조금 관리 2.부조금 수정(update)
 	public void InsertSubsidyList() {
 		
+		System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 		System.out.println("부조한 사람의 이름을 입력하세요");
 		String insertyname = s.next();
 		System.out.println("부조한 금액을 입력하세요");
@@ -225,58 +221,106 @@ public class FuneralDirectorMenu {
 		String insertAccountBank = s.next();
 		System.out.println("환자 아이디를  입력하세요");
 		int insertPatient = s.nextInt();
+		System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 
 		SubsidyDto subsidyDto = new SubsidyDto(insertyname, insertprice, insertAccountInfo, insertAccountBank,insertPatient);
 		System.out.println("부조금 정보가 추가 되었습니다");
 		
 
 		sdc.registerSubsidy(subsidyDto);
-		System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-		System.out.println("┃"+insertyname);
-		System.out.println("┃"+insertPatient);
+		
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+		System.out.println(insertyname);
+		System.out.println(insertPatient);
 		System.out.println(insertprice);
 		System.out.println(insertAccountInfo);
 		System.out.println(insertAccountBank);
+		System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 		
 
 	}
 	
-	//update
+	//부조금 관리 3.부조금 수정(update)
 	public void updateDeath() {
-		System.out.println("부조금 수정할 이름을 입력하세요");
+		System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+		System.out.print("부조금 수정할 이름을 입력하세요 : ");
 		String name =s.next();
-		
-		System.out.println("부조금 수정할 금액을 입력하세요");
+		System.out.print("부조금 수정할 금액을 입력하세요 : ");
 		int price =s.nextInt();
-		System.out.println("부조금 수정할 계좌번호을 입력하세요");
+		System.out.print("부조금 수정할 계좌번호을 입력하세요 : ");
 		String info =s.next();
-		System.out.println("부조금 수정할 은행을 입력하세요");
+		System.out.print("부조금 수정할 은행을 입력하세요 : ");
 		String bank =s.next();
+		System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+		System.out.println();
 		
 		int result = sdc.updateDeath(price, info, bank, name);
 		if(result>0) {
-			System.out.println("성공");
+			System.out.println("부조금 정보가 수정 완료 되었습니다");
+			System.out.println();
+			System.out.println();
+			System.out.println();
+			System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+			System.out.println("부조한 사람 : "+name);
+			System.out.println("부조한 금액 : "+price);
+			System.out.println("계좌 번호 : "+info);
+			System.out.println("계좌 은행 : "+bank);
+			System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 		}else {
 			System.out.println("실패");
 		}
-		//update insert delete는 결과값으로 성공하면 1 실패하면 0을 반환한다 
 	}
 	
 	
-	//delete
+	//부조금 관리 4.부조금 삭제(delete)
 	public void deleteDeath() {
+		System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+		System.out.println();
 		System.out.println("부조금 삭제할 이름을 입력하세요");
 		String name =s.next();
+		System.out.println();
+		System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 		
 		
 		
 		int result = sdc.deleteDeath(name);
 		if(result > 0) {
-			System.out.println("성공");
+			System.out.println("부조금 정보가 삭제 완료 되었습니다");
 		}else {
 			System.out.println("실패");
 		}
 	}
+	
+	// 5.환자 이름별 부조금 총 조회
+	//부조금 관리 5.환자 이름별 부조금 총 조회(delete)
+			public void selectBypatient() {
+				System.out.println("환자 이름를 입력하세요");
+				String name = s.next();
+				
+				ArrayList<SubsidyDto> list;
+				list = sdc.selectBypatient(name);
+				System.out.println("");
+//				for (SubsidyDto sd : list) {
+//					System.out.println("=======부조금 총 조회======");
+//					System.out.println(sd);
+//				}
+				
+				for(int i = 0;i<list.size();i++) {
+					
+					System.out.println(i);
+					System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+					System.out.println(list.get(i).getSubsidyName());
+					System.out.println(list.get(i).getSubsidy());
+					System.out.println(list.get(i).getAccount_number());
+					System.out.println(list.get(i).getAccount_bank());
+					System.out.println(list.get(i).getFunelral_id());
+					System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+					//System.out.println(list.get(i).getClass());
+				}
+			}
 
 }
 //사망자 명단 조회 메뉴
