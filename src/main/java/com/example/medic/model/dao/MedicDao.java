@@ -13,6 +13,10 @@ import com.example.medic.model.dto.Medic;
 import com.example.medic.model.dto.PharmacyData;
 import static com.example.config.JdbcTemplate.getConnection;
 
+/**
+ * @author 최영준
+ *
+ */
 public class MedicDao {
 
 	// MEMO 모든 제품명을 SELECT
@@ -41,7 +45,6 @@ public class MedicDao {
 			}
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
@@ -71,7 +74,7 @@ public class MedicDao {
 		return data;
 	}
 
-	// MEMO - 신제품정보를 입력해줌
+	// MEMO - 5가지의 신제품 정보를 받아서 데이터 INSERT
 	public void insert(Medic medic) {
 
 		String sql = "INSERT INTO PHA_STOCK (pha_no, pha_name, pha_type, pha_price, pha_stock) VALUES (?,?,?,?,?)";
@@ -191,7 +194,7 @@ public class MedicDao {
 	}
 	
 
-//	// MEMO 계정연결 데이터
+//	// MEMO LOCAL DB 연결 데이터 
 //	private Connection getConnection() throws SQLException {
 //		String url = "jdbc:oracle:thin:@localhost:1521:XE";
 //		String username = "JO3";

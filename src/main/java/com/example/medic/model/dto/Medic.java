@@ -1,5 +1,9 @@
 package com.example.medic.model.dto;
 
+/**
+ * @author 최영준
+ *
+ */
 public class Medic {
 	private int phaNo;
 	private String phaName;

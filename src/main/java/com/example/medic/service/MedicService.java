@@ -7,9 +7,14 @@ import com.example.medic.model.dto.Medic;
 import com.example.medic.model.dto.PharmacyData;
 import com.example.medic.view.MedicMenu;
 
+/**
+ * @author 최영준
+ *
+ */
 public class MedicService {
 	MedicDao medicDao = new MedicDao();
-	// =================DAO에서 받은 정보의 값이 올바른지 확인 ===============
+	
+	// =================DAO에서 받은 정보의 값을 조작 ===============
 	// MEMO dao에서 받은 sql 내용이 있는지 확인하고 컨트롤러로 보내주는곳
 
 	// MEMO - 총재고확인
@@ -48,11 +53,10 @@ public class MedicService {
 	public void insertPha(Medic medic) {
 		MedicMenu menu = new MedicMenu();
 
-		// 중복약 번호 검사 , 제품이 존재하면  0 아니면 입력값번호를 가짐
-		int checkPhaNo= medicDao.setlectPhaNo(medic);
-//		System.out.println("조회한 번호는 몇번인가요 ?  " + checkPhaNo);
+		// 중복약 번호 검사 , 제품이 존재하면 0 아니면 입력값번호를 가짐
+		int checkPhaNo = medicDao.setlectPhaNo(medic);
 
-		// 제품이 존재하면  0 , 안 입고를 시작함
+		// 제품이 존재하면 0 , 안 입고를 시작함
 		if (checkPhaNo == 0) {
 			medicDao.insert(medic);
 
@@ -62,7 +66,7 @@ public class MedicService {
 
 	}
 
-	//  MEMO 처방전 출력함수
+	// MEMO 처방전 출력함수
 	/**
 	 * @param patientNumber
 	 */
@@ -78,10 +82,8 @@ public class MedicService {
 
 			menu.displayError("해당되는 처방전 데이터가 없습니다.");
 		}
-		
 
 	}
-	// 없으니까 0이다
 
 	// MEMO 상품을 제거하는 함수!
 	public void deletePha(String phaName) {
@@ -90,16 +92,15 @@ public class MedicService {
 		System.out.println(abc);
 		if (abc <= 0) {
 			menu.displayError("해당 이름의 상품명은 없습니다.");
-			
+
 			// 상품이 존재하고 삭제를 한다.
-		}else if (abc == 1) {
-			menu.displayInfo("해당 상품 "+phaName + "을(를) 삭제하였습니다.");
-		}
-		else if (abc > 1) {
+		} else if (abc == 1) {
+			menu.displayInfo("해당 상품 " + phaName + "을(를) 삭제하였습니다.");
+		} else if (abc > 1) {
 			menu.displayInfo(abc + "가지의 중복된 이름의 상품을 제거하였습니다.");
 
 		}
-		System.out.println("입력이름"+  phaName);
+		System.out.println("입력이름" + phaName);
 
 	}
 

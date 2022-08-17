@@ -2,6 +2,10 @@ package com.example.medic.model.dto;
 
 import java.sql.Date;
 
+/**
+ * @author 최영준
+ *
+ */
 public class Prescription {
 	private int patientNo;
 	private String patientName;

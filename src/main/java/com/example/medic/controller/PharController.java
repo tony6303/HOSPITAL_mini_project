@@ -3,6 +3,10 @@ package com.example.medic.controller;
 import com.example.medic.model.dto.Medic;
 import com.example.medic.service.MedicService;
 
+/**
+ * @author 최영준
+ *
+ */
 public class PharController {
 	MedicService medicService = new MedicService();
 

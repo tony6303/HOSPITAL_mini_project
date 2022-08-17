@@ -1,3 +1,4 @@
+
 package com.example.medic.view;
 
 import java.sql.Date;
@@ -8,6 +9,10 @@ import com.example.medic.controller.PharController;
 import com.example.medic.model.dto.Medic;
 import com.example.medic.model.dto.PharmacyData;
 
+/**
+ * @author 최영준
+ *
+ */
 public class MedicMenu {
 
 	public static Object main;
@@ -95,7 +100,6 @@ public class MedicMenu {
 	}
 
 	// MEMO 재고관리 - 총재고확인하기
-	// 메인메뉴에서는 컨트롤러에 있는 메소드를 호출한다.
 	private void checkStock() {
 		Pharcontroller.selectAll();
 
@@ -105,11 +109,15 @@ public class MedicMenu {
 	public void displayMemberList(List<Medic> list) {
 
 		System.out.println("\n조회된 전체 회원정보는 다음과 같습니다.");
-		System.out.println("상품번호    상품명     상품종류    상품가격     재고수량 ");
-		System.out.println("----------------------------------------------------------");
+		System.out.println("  상품번호   상품명        상품종류    상품가격         재고수량");
+
+//		System.out.println("│상품번호 \t 상품명 \t 상품종류 \t 상품가격 \t 재고수량 ");
+		System.out.println("│------------------------------------------------------│");
 
 		for (Medic m : list) { 
-			System.out.println("  "+ m.getPhaNo() + "       "  + m.getPhaName() + "       "+m.getPhaType() + "         " + m.getPhaPrice() + "     " +m.getPhaStock() );
+			System.out.printf(" %3s  \t %5s \t %4s \t %6s \t %5s \t \n" , m.getPhaNo(),m.getPhaName(),m.getPhaType(), m.getPhaPrice() , m.getPhaStock() );
+			
+			System.out.println("│------------------------------------------------------│");
 		}
 
 	}
@@ -169,8 +177,6 @@ public class MedicMenu {
 		System.out.println("▶");
 
 		Medic medic = new Medic(phaNo, phaName, phaType, phaPrice, phaStock);
-
-//        Medic medic = new Medic(12, "두통약", "etc", 3000, 10);
 		Pharcontroller.insertNewPhar(medic);
 
 	}
