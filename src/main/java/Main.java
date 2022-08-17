@@ -5,7 +5,7 @@ import java.sql.*;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
-        AsciiArtUtils.show("src/main/resources/test.txt");
+        AsciiArtUtils.show("test.txt");
         IndexMenu menu = new IndexMenu();
         menu.mainMenu();
     }

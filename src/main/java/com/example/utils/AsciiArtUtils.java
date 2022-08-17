@@ -7,9 +7,10 @@ public class AsciiArtUtils {
     private AsciiArtUtils() {
     }
 
-    public static void show(String filePath) {
+    public static void show(String fileName) {
+    	String path = "src/main/resources/";
         try {
-            FileReader reader = new FileReader(filePath);
+            FileReader reader = new FileReader(fileName);
 
             try {
                 int ch;
