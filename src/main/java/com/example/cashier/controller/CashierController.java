@@ -1,7 +1,10 @@
-package main.java.com.example.cashier.controller;
+package com.example.cashier.controller;
 
-import main.java.com.example.cashier.model.dto.Price;
-import main.java.com.example.cashier.service.CashierService;
+import java.util.List;
+
+import com.example.cashier.model.dto.Price;
+import com.example.cashier.service.CashierService;
+import com.example.patient.model.dto.Patient;
 
 public class CashierController {
 	
@@ -22,6 +25,10 @@ public class CashierController {
 
 	public int salaryselect(int salary) {
 		return cashierService.salaryselect(salary);
+	}
+
+	public List<Patient> checkResNo(String resNo) {
+		return cashierService.selectByResNo(resNo);
 	}
 	
 	

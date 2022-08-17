@@ -1,7 +1,10 @@
-package main.java.com.example.cashier.service;
+package com.example.cashier.service;
 
-import main.java.com.example.cashier.model.dao.CashierDao;
-import main.java.com.example.cashier.model.dto.Price;
+import java.util.List;
+
+import com.example.cashier.model.dao.CashierDao;
+import com.example.cashier.model.dto.Price;
+import com.example.patient.model.dto.Patient;
 
 public class CashierService {
 	
@@ -29,6 +32,12 @@ public class CashierService {
 
 	public int salaryselect(int salary) {
 		return cashierDao.salaryselect(salary);
+	}
+
+
+
+	public List<Patient> selectByResNo(String resNo) {
+		return cashierDao.selectByResNo(resNo);
 	}
 	
 	

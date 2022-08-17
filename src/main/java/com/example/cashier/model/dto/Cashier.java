@@ -1,4 +1,4 @@
-package main.java.com.example.cashier.model.dto;
+package com.example.cashier.model.dto;
 
 
 

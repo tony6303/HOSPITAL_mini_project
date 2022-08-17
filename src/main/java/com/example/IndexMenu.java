@@ -2,15 +2,15 @@ package com.example;
 
 import java.util.Scanner;
 
+import com.example.cashier.view.CashierMenu;
 import com.example.patient.view.PatientMenu;
 
 
 public class IndexMenu {
     private final Scanner sc = new Scanner(System.in);
     private final PatientMenu pm = new PatientMenu();
+    private final CashierMenu cm = new CashierMenu();
 
-    
-//    private final ProductMenu prom = new ProductMenu();
 
     public void mainMenu() {
         while (true) {
@@ -23,9 +23,9 @@ public class IndexMenu {
                 case 2:
                     break;
                 case 3:
+                	cm.main();
                     break;
                 case 4:
- 
                     break;
                 case 5:
                     pm.main();
