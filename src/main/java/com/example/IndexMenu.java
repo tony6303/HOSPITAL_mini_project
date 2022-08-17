@@ -4,13 +4,13 @@ import java.util.Scanner;
 
 import com.example.medic.view.MedicMenu;
 import com.example.patient.view.PatientMenu;
+import com.example.product.view.ProductMenu;
 
 public class IndexMenu {
     private final Scanner sc = new Scanner(System.in);
     private final PatientMenu pm = new PatientMenu();
     private final MedicMenu mm = new MedicMenu();
-    
-//    private final ProductMenu prom = new ProductMenu();
+    private final ProductMenu prom = new ProductMenu();
 
     public void mainMenu() {
         while (true) {
@@ -25,6 +25,7 @@ public class IndexMenu {
                 case 3:
                     break;
                 case 4:
+                	prom.main();
                     break;
                 case 5:
                     pm.main();
