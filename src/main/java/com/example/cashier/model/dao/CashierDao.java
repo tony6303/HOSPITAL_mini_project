@@ -14,7 +14,10 @@ import com.example.cashier.model.dto.Price;
 import com.example.patient.model.dto.Patient;
 
 
-
+/**
+ * @author cpzhr(박경민)
+ *
+ */
 public class CashierDao {
 
 //	private Connection getConnection() throws SQLException {
@@ -28,10 +31,10 @@ public class CashierDao {
 	public int getColumnR() { // 예약테이블 모두 조회
 		try (Statement statement = getConnection().createStatement()) {
 			 //SELECT는 ResultSet을 사용하여 executeQuery를 통해 쿼리를 실행하면 ResultSet타입으로 반환하여 결과값 저장
-			ResultSet rs = statement.executeQuery("SELECT COUNT(1) "
+			ResultSet rs = statement.executeQuery("SELECT MAX(RESERVATION_NO) "
 												 +"FROM RESERVATION");  //rs에 쿼리 결과값 넣음
 			rs.next(); // 공백 이전까지의 문자열을 입력받음.
-			return rs.getInt(1);
+			return rs.getInt(1);  // rs 결과 반환
 		} catch (SQLException e) { 
 			throw new RuntimeException(e);
 		}
@@ -91,6 +94,7 @@ public class CashierDao {
 		String sql = "UPDATE COST "
 				+	 "SET PRICE = PRICE*1.1 "
 				+	 "WHERE DISEASE_NAME = ?";
+		
 		try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
 			pstmt.setString(1, disName);
 			
@@ -136,5 +140,29 @@ public class CashierDao {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	public int selectPriceByDiseaseName(String disName) {
+		String sql = "select price "
+				+ 	 "from cost "
+				+ 	 "where disease_name = ?";
+		
+		try {
+			PreparedStatement pstmt = getConnection().prepareStatement(sql);
+			pstmt.setString(1, disName);
+			ResultSet rset = pstmt.executeQuery();
+			int price= 0;
+			if (rset.next()) {
+				price = rset.getInt("Price");
+			}
+			
+			return price;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return 0;
 	}
 }

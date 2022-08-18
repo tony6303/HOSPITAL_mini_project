@@ -6,6 +6,10 @@ import com.example.cashier.model.dao.CashierDao;
 import com.example.cashier.model.dto.Price;
 import com.example.patient.model.dto.Patient;
 
+/**
+ * @author cpzhr(박경민)
+ *
+ */
 public class CashierService {
 	
 	CashierDao cashierDao = new CashierDao();  
@@ -38,6 +42,12 @@ public class CashierService {
 
 	public Patient selectByResNo(String resNo) {
 		return cashierDao.selectByResNo(resNo);
+	}
+
+
+
+	public int selectPriceByDiseaseName(String disName) {
+		return cashierDao.selectPriceByDiseaseName(disName);
 	}
 	
 	
