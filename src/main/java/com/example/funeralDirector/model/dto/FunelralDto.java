@@ -1,16 +1,14 @@
 package com.example.funeralDirector.model.dto;
 
 import java.util.Date;
-
+/** @author fla90*/
 public class FunelralDto {
 	 private int funelralId;
 	    private Date dateDeath;
 	    private String deathReason;
 	    private int patientId;
 	    private String patientName;
-	    //PATIENT_NAME
 
-	    //생성자
 	    public FunelralDto() {
 			super();
 		}
@@ -23,14 +21,12 @@ public class FunelralDto {
 	        this.patientName = patientName;
 	    }
 
-	    //toString
 		@Override
 		public String toString() {
 			return "FunelralDto [funelralId=" + funelralId + ", dateDeath=" + dateDeath + ", deathReason=" + deathReason
 					+ ", patientId=" + patientId + ", patientName=" + patientName + "]";
 		}
 		
-	    //getter & setter
 	    public int getFunelralId() {
 	        return funelralId;
 	    }

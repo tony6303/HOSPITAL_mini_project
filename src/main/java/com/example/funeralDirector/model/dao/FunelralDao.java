@@ -1,5 +1,6 @@
 package com.example.funeralDirector.model.dao;
 
+/** @author fla90*/
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,17 +13,19 @@ import static com.example.config.JdbcTemplate.getConnection;
 
 
 public class FunelralDao {
-	//하나 조회하는 밑에꺼 걍 오류떠서 걍 추가한거다
+	
 	public FunelralDao() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
-	//사망자 하나만 조회
+	//사망자 이름,주민번호별 조회
 	public FunelralDto findByFunelralId(String name, String no) {
 		FunelralDto funelralDto = null;
-		//SQL 조회 문
+		
+	
 		String sql ="SELECT A.FUNELRAL_ID, A.DATE_DEATH, A.DEATH_REASON, A.PATIENT_ID,B.PATIENT_NAME FROM FUNELRAL A LEFT JOIN PATIENT B ON A.PATIENT_ID = B.PATIENT_ID WHERE B.PATIENT_NAME= ? AND B.PATIENT_NO=?";
 	
+		
 		
 		try(PreparedStatement pstmt = getConnection().prepareStatement(sql)){
 			pstmt.setString(1, name);
@@ -49,7 +52,6 @@ public class FunelralDao {
 			
 			try (PreparedStatement pstmt = getConnection().prepareStatement(sql)){
 				pstmt.setInt(1, funelralId2);
-//				pstmt.setDate(2, (Date) funelraldto.getDateDeath());
 				pstmt.setString(2, deathReason);
 				pstmt.setInt(3, patientId);
 				
@@ -64,37 +66,42 @@ public class FunelralDao {
 	
 	//사망자 명단전체내용 조회 
 	public ArrayList<FunelralDto> selectAll(){
-		//실행할 sql문 적어라 
+		
+		
 		String sql = "SELECT * FROM FUNELRAL A LEFT JOIN PATIENT B ON A.PATIENT_ID = B.PATIENT_ID";
-		//전체 조회할꺼니깐 dto형태의 arraylist를 선언해야것지!
+		
 		ArrayList<FunelralDto> list = new ArrayList<>();
 		Connection connection; 
 		
+		
+		
+		
 		try {
-			//연결하고 연결한 값을 넘겨 -> 커리문은 실행할 Statemet객체를 만들고 쿼리문전송
-			//실행한 결과를 rset으로 받아둬
 			connection = getConnection();
 			
 			Statement stmt = connection.createStatement();
 			ResultSet rset = stmt.executeQuery(sql);
-			//System.out.println(rset);
 			
 			while(rset.next()) {
 				FunelralDto fd = new FunelralDto();
 				fd.setPatientName(rset.getString("PATIENT_NAME"));
 				fd.setDateDeath(rset.getDate("DATE_DEATH"));
 				fd.setDeathReason(rset.getString("DEATH_REASON"));
+				fd.setPatientId(rset.getInt("PATIENT_ID"));
+				fd.setFunelralId(rset.getInt("FUNELRAL_ID"));
+				
 				
 				list.add(fd);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("여기가 문제니?");
 		}
 		return list;
+		
+		
+		
 	}
-	
 	
 }	
 	
