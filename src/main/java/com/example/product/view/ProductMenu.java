@@ -1,5 +1,6 @@
 package com.example.product.view;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,7 +15,7 @@ import com.example.product.model.dto.Product;
 //메뉴는 메뉴의 작업만 해야한다. ( 값 출력 )
 //메뉴(View) 는 컨트롤러와만 통신한다.
 public class ProductMenu {
-	private final Scanner sc = new Scanner(System.in);
+	Scanner sc = new Scanner(System.in);
 	private final ProductController proControll = new ProductController();
 
 	public void main() {
@@ -66,11 +67,22 @@ public class ProductMenu {
 
 	private void modifyProduct() {
 		selectAllProduct();
+		int modifyAmount = 0;
+		
 		System.out.println("===== 재고 수정 =====");
 		System.out.println("수정할 제품의 아이디를 입력하세요");
 		int modifyId = sc.nextInt();
-		System.out.println("수정할 수량을 입력하세요");
-		int modifyAmount = sc.nextInt();
+		
+		while(true) {
+			try {
+				System.out.println("수정할 수량을 입력하세요");
+				modifyAmount = sc.nextInt();	
+				break;
+			} catch (InputMismatchException e) {
+				System.out.println("수량은 양의 정수만 입력해주세요");
+				sc = new Scanner(System.in);
+			}
+		}
 
 		int result = proControll.modifyProduct(modifyId, modifyAmount); // 컨트롤러 떄리기
 		if (result > 0) {
@@ -94,8 +106,20 @@ public class ProductMenu {
 		System.out.println("===== 재고 추가 =====");
 		System.out.print("제품이름 입력 : ");
 		String name = sc.next();
-		System.out.print("수량 입력 : ");
-		int amount = sc.nextInt();
+		int amount = 0;
+		
+		while(true) { // 계속 입력받는다
+			try {
+				System.out.print("수량 입력 : ");
+				amount = sc.nextInt();	
+				break;
+			} catch (InputMismatchException e) {  // 정수만 입력받아야 하는데 문자를 입력받을 시 예외처리
+				System.out.println("수량은 양의 정수만 입력해주세요");
+				sc = new Scanner(System.in); // 새로 Scanner 를 만든다
+			}
+		}
+		
+		
 
 		Product product = new Product(name, amount); // pId 와 receiveDate 는 자동으로 생성하게 만들어놔서 2개값만 받도록 함
 

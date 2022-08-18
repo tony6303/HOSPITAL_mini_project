@@ -1,11 +1,11 @@
 package com.example.patient.view;
 
+import java.util.List;
+import java.util.Scanner;
+
 import com.example.patient.controller.PatientController;
 import com.example.patient.model.dto.Patient;
 import com.example.patient.model.dto.Reservation;
-
-import java.util.List;
-import java.util.Scanner;
 
 public class PatientMenu {
     private final Scanner sc = new Scanner(System.in);

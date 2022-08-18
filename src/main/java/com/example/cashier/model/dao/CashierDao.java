@@ -1,6 +1,6 @@
 package com.example.cashier.model.dao;
+import static com.example.config.JdbcTemplate.getConnection;
 
-import static com.example.config.JdbcTemplate.*;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,8 +9,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import com.example.cashier.model.dto.Price;
 import com.example.patient.model.dto.Patient;
+
+
 
 public class CashierDao {
 
