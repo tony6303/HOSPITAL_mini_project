@@ -6,10 +6,9 @@ import com.example.funeralDirector.model.dto.SubsidyDto;
 import com.example.funeralDirector.service.SubsidyService;
 
 public class SubsidyController {
-	//부조금 서비스 객체 선언해줘야 쓸 수 있지!!!
-	//private final SubsidyDto subsidyDto = new SubsidyDto();
+	
   	private final SubsidyService subsidyService = new SubsidyService();
-	//객체 선언한걸로 부조금 체크 가져와 !!
+  	
 	public ArrayList<SubsidyDto> selectSubsidy() {
 		return subsidyService.checkSubsidy();
 	}
@@ -19,7 +18,7 @@ public class SubsidyController {
 		return subsidyService.selectBypatient(patient_name);
 	}
 	
-	//부조금 추가 컨트롤러 intsert
+	//부조금 추가 컨트롤러 insert
 	public int registerSubsidy(SubsidyDto subsidyDto){
 		return subsidyService.createSubsidy(subsidyDto);
 	}

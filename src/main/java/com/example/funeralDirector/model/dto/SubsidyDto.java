@@ -1,6 +1,6 @@
 package com.example.funeralDirector.model.dto;
 
-import java.util.List;
+//import java.util.List;
 
 public class SubsidyDto {
 	private String SubsidyName; 
@@ -14,24 +14,7 @@ public class SubsidyDto {
 		super();
 	}
 	
-	
-//	public SubsidyDto(String subsidyName, int subsidy, String account_number, String account_bank) {
-//		super();
-//		this.SubsidyName = subsidyName;
-//		this.Subsidy = subsidy;
-//		this.Account_number = account_number;
-//		this.account_bank = account_number;
-//	}
-
-//	public SubsidyDto(String subsidyName, int subsidy, String account_number, String account_bank, int funelral_id) {
-//		super();
-//		SubsidyName = subsidyName;
-//		Subsidy = subsidy;
-//		Account_number = account_number;
-//		this.account_bank = account_bank;
-//	}
 	public SubsidyDto(String subsidyName, int subsidy, String account_number, String account_bank, int insertPatient) {
-		
 		this.SubsidyName = subsidyName;
 		this.Subsidy = subsidy;
 		this.Account_number = account_number;
@@ -87,29 +70,4 @@ public class SubsidyDto {
 	public void setFunelral_id(int funelral_id) {
 		this.funelral_id = funelral_id;
 	}
-	
-
-
-	//toString
-//	@Override
-//	public String toString() {
-//		return 
-//				  "부조한 한 사람 : " + getSubsidyName() +"\n"
-//				+ "부조한 금액 : " + getSubsidy()+"원" +"\n"
-//				+ "들어온 계좌 : "+ getAccount_number() +"\n"
-//				+ "은행 : "+ getAccount_bank() +"\n";
-//				//"돈낸사람 " + SubsidyName + "\n"
-//				//+ "Subsidy=" + Subsidy +"\n"
-//				//+ "Account_number=" + Account_number  +"\n"
-//				//+ "getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
-//				//+ super.toString() + "]";
-//	}
-
-
-	
-
-//	public List<SubsidyDao> selectAll() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 }

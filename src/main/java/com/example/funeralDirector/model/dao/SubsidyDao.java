@@ -14,8 +14,11 @@ public class SubsidyDao {
 		
 		//부조금 전체 정보 조회 
 		public ArrayList<SubsidyDto> selectAll(){
+			
+			
 			String sql = "SELECT * FROM SUBSIDY";
-			//전체 조회할 꺼니깐 dto형태의 arrayList를 선언해야겠지!
+			
+			
 			ArrayList<SubsidyDto> list = new ArrayList<>();
 			Connection connection;
 			
@@ -34,18 +37,19 @@ public class SubsidyDao {
 					list.add(sd);
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return list;
 		}
-		//부조금 전체 정보 조회 끝
 		
 		
 		//환자이름 별 부조금 전체 정보 조회 
 				public ArrayList<SubsidyDto> selectBypatient(String patient_name){
+					
+					
 					String sql = "SELECT SUBSIDY_NAME, SUBSIDY, ACCOUNT_INFO, ACCOUNT_BANK ,A.FUNELRAL_ID FROM SUBSIDY A LEFT JOIN FUNELRAL B ON A.FUNELRAL_ID = B.FUNELRAL_ID LEFT JOIN PATIENT C ON B.FUNELRAL_ID = C.PATIENT_ID WHERE C.PATIENT_NAME = ? ";
-					//전체 조회할 꺼니깐 dto형태의 arrayList를 선언해야겠지!
+					
+					
 					ArrayList<SubsidyDto> list = new ArrayList<>();
 					
 					try (PreparedStatement pstmt = getConnection().prepareStatement(sql)){
@@ -64,18 +68,15 @@ public class SubsidyDao {
 							list.add(sd);
 						}
 					} catch (SQLException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					return list;
 				}
-				//환자이름 별 부조금 전체 정보 조회  끝
 		
 		
 		//부조금 추가 
 		public int insert(SubsidyDto subsidyDto) {
 			
-			//sql문 삽입해야지?
 			
 			String sql = "INSERT INTO SUBSIDY(SUBSIDY_NAME, SUBSIDY, ACCOUNT_INFO, ACCOUNT_BANK, FUNELRAL_ID) VALUES(?,?,?,?,?)";
 			
@@ -95,7 +96,7 @@ public class SubsidyDao {
 			}
 			
 		}
-		//부조금 추가 끝
+
 		
 		//부조금 수정 update
 		public int updateDeath(int subsidy, String account_info, String account_bank,String subsidy_name) {
@@ -123,10 +124,6 @@ public class SubsidyDao {
 		
 		try (PreparedStatement pstmt = getConnection().prepareStatement(sql)){
 			pstmt.setString(1, subsidy_name);
-//			pstmt.setString(2, account_info);
-//			pstmt.setString(3, account_bank);
-//			pstmt.setString(4, subsidy_name);
-			
 			
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
