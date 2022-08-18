@@ -172,7 +172,6 @@ public class FuneralDirectorMenu {
 		
 		System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 		System.out.println("사망자 아이디 : "+ funelralId2);
-		//System.out.println("사망 날짜 : "+ deathReason);sysdate()
 		System.out.println("사망 사유 : "+ deathReason);
 		System.out.println("환자 아이디 : "+ patientId);
 		System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
