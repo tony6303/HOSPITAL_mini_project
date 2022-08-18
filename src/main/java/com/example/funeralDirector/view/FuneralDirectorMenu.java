@@ -56,6 +56,8 @@ public class FuneralDirectorMenu {
 			System.out.println();
 			System.out.println("3.사망자 총 조회");
 			System.out.println();
+			System.out.println("0.이전 페이지");
+			System.out.println();
 			System.out.println("메뉴 번호를 선택하세요");
 			
 			int numu2num = s.nextInt();
@@ -92,6 +94,8 @@ public class FuneralDirectorMenu {
 			System.out.println("4.부조금 삭제");
 			System.out.println();
 			System.out.println("5.사망자별 부조금 조회");
+			System.out.println();
+			System.out.println("0.이전 페이지");
 			System.out.println();
 			System.out.println("메뉴 번호를 선택하세요");
 			int numu3num = s.nextInt();
