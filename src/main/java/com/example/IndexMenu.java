@@ -27,6 +27,7 @@ public class IndexMenu {
 			switch (menu) {
 			case 1:
 				pm.main();
+				break;
 			case 2:
 				cm.main();
 				break;

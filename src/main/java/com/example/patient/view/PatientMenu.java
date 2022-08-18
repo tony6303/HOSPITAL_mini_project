@@ -97,7 +97,7 @@ public class PatientMenu {
         System.out.println("===== 환자 리스트 확인 =====");
         List<Patient> patientList = pc.findPatientList();
         for (Patient patient : patientList) {
-            System.out.println("환자번호 : " + patient.getPatientNo() + ", 이름 : " + patient.getPatientName() + ", 주민번호 : "
+            System.out.println("환자번호 : " + patient.getPatientId() + ", 이름 : " + patient.getPatientName() + ", 주민번호 : "
                     + patient.getPatientNo() + ", 연락처 : " + patient.getPhone());
         }
     }
