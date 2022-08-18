@@ -20,12 +20,12 @@ public class CashierMenu {
 	public void main() {  // true가 될때까지반복   // 정수형으로 입력받아 해당하는 번호를 실행하고 빠져나옴
 		while (true) { 
 			System.out.println("*** 수납원 페이지 ***\n"
-					+ "1. 환자 예약 등록\n"
-					+ "2. 진료비 변경 안내\n"
-					+ "3. 수납 비용 청구\n"
-					+ "4. 수납원 해고\n" 
-					+ "0. 뒤로가기\n"
-					+ "메뉴 번호 선택 : ");
+					+				 "1. 환자 예약 등록\n"
+					+ 				 "2. 진료비 변경 안내\n"
+					+ 				 "3. 수납 비용 청구\n"
+					+ 				 "4. 수납원 해고\n" 
+					+				 "0. 뒤로가기\n"
+					+				 "메뉴 번호 선택 : ");
 			
 			int menu = sc.nextInt();
 			switch (menu) {
@@ -92,7 +92,6 @@ public class CashierMenu {
 		sc.nextLine();
 		String resNo = sc.nextLine();
 		Price ca = cc.price(resNo);
-		//System.out.println("질병 이름 : " + ca.getDisease_name());
 		System.out.println("진료 날짜 : " + ca.getMr_date());
 		System.out.println("환자 번호 : " + ca.getPatient_id());
 		System.out.println("환자 이름 : " + ca.getPatient_no() + "님");
@@ -102,7 +101,7 @@ public class CashierMenu {
 
 
 	}
-	//입력받은 값을 resNo에 넣고 excuteQuery를 실행해서 
+	//입력한 값을 받아서 if문 돌려서 환자 등록
 	private void registerReservation() {  
 		System.out.print("주민번호를 입력하세요 : ");
 		sc.nextLine();
@@ -124,6 +123,7 @@ public class CashierMenu {
 		
 	}
 	
+	//질병명으로 가격조회
 	private int priceSelect(String disName) {
 		int priceSelct = cc.selectPriceByDiseaseName(disName);
 		return priceSelct;

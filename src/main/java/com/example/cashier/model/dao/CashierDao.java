@@ -20,15 +20,8 @@ import com.example.patient.model.dto.Patient;
  */
 public class CashierDao {
 
-//	private Connection getConnection() throws SQLException {
-//		String url = "jdbc:oracle:thin:@localhost:1521:XE";
-//		String username = "hospital";
-//		String password = "1234";
-//
-//		return DriverManager.getConnection(url, username, password);
-//	}
-
-	public int getColumnR() { // 예약테이블 모두 조회
+	// 예약테이블 모두 조회
+	public int getColumnR() { 
 		try (Statement statement = getConnection().createStatement()) {
 			 //SELECT는 ResultSet을 사용하여 executeQuery를 통해 쿼리를 실행하면 ResultSet타입으로 반환하여 결과값 저장
 			ResultSet rs = statement.executeQuery("SELECT MAX(RESERVATION_NO) "
@@ -40,6 +33,9 @@ public class CashierDao {
 		}
 	}
 
+	//RESERVATION테이블에 예약번호 -> 자동으로 1증가
+	//					예약날짜 -> 현재날짜
+	//					환자번호 -> 주민번호 넣어서 조회
 	public int reservationinsert(String resNo) {
 		
 		
@@ -47,7 +43,7 @@ public class CashierDao {
 				+	 "VALUES (? ,SYSDATE, (SELECT PATIENT_ID FROM PATIENT WHERE PATIENT_NO = ?))";
 
 		try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
-			pstmt.setInt(1, (getColumnR() + 1));
+			pstmt.setInt(1, (getColumnR() + 1)); // 예약번호 자동으로 1증가
 			pstmt.setString(2, resNo);
 
 			getConnection().commit();
@@ -58,6 +54,7 @@ public class CashierDao {
 
 	}
 
+	//물음표에 resNo를 넣고 입력한 주민번호와 AND  진료 날짜 = 현재 날짜인 환자의 각 컬럼을 출력
 	public Price priceselect(String resNo) {
 		String sql = "select "
 				+		"A.PATIENT_ID "
@@ -77,12 +74,14 @@ public class CashierDao {
 
 			
 			if (rset.next()) {
-				orr = new Price(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getDate(4),
-						rset.getString(5), rset.getInt(6));
+				orr = new Price(rset.getInt(1),
+								rset.getString(2),
+								rset.getString(3),
+								rset.getDate(4),
+								rset.getString(5),
+								rset.getInt(6));
 			}
 			rset.close();
-			
-			
 			
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -90,6 +89,7 @@ public class CashierDao {
 		return orr;
 	}
 
+	//질병을 입력해 cost테이블의 price를 price*1.1배로 수정
 	public int priceUpdate(String disName) {
 		String sql = "UPDATE COST "
 				+	 "SET PRICE = PRICE*1.1 "
@@ -107,6 +107,7 @@ public class CashierDao {
 		
 	}
 
+	//?에 salary값을 입력해 입력값보다 직원의 급여보다 높으면 해당직원 삭제
 	public int salaryselect(int salary) {
 		String sql = "DELETE FROM CASHIER_INFO "
 				+	 "WHERE SALARY >= ?";
@@ -120,6 +121,8 @@ public class CashierDao {
 		}
 	}
 
+	
+	//주민번호로 환자조회
 	public Patient selectByResNo(String resNo) {
 		Patient patient = null;
 		
@@ -131,7 +134,10 @@ public class CashierDao {
 			pstmt.setString(1, resNo);
 			ResultSet rset = pstmt.executeQuery();
 			if (rset.next()) {
-                patient = new Patient(rset.getLong(1), rset.getString(2), rset.getString(3), rset.getString(4));
+                patient = new Patient(rset.getLong(1), 
+                					  rset.getString(2), 
+                					  rset.getString(3), 
+                					  rset.getString(4));
             }
 			
 			rset.close();
@@ -141,7 +147,8 @@ public class CashierDao {
 			throw new RuntimeException(e);
 		}
 	}
-
+	
+	//질병명으로 가격조회
 	public int selectPriceByDiseaseName(String disName) {
 		String sql = "select price "
 				+ 	 "from cost "
