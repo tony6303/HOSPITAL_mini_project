@@ -1,7 +1,7 @@
 package com.example.funeralDirector.model.dto;
 
 import java.util.Date;
-
+/** @author fla90*/
 public class FunelralDto {
 	 private int funelralId;
 	    private Date dateDeath;

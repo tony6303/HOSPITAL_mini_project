@@ -1,7 +1,7 @@
 package com.example.funeralDirector.model.dto;
 
-//import java.util.List;
 
+/** @author fla90*/
 public class SubsidyDto {
 	private String SubsidyName; 
 	private int Subsidy;

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.example.funeralDirector.model.dto.SubsidyDto;
 import com.example.funeralDirector.service.SubsidyService;
 
+/** @author fla90*/
 public class SubsidyController {
 	
   	private final SubsidyService subsidyService = new SubsidyService();

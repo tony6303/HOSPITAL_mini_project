@@ -6,6 +6,7 @@ import com.example.funeralDirector.model.dao.FunelralDao;
 import com.example.funeralDirector.model.dto.FunelralDto;
 import com.example.funeralDirector.view.FuneralDirectorMenu;
 
+/** @author fla90*/
 public class FunelralService {
 	FunelralDao funelralDao = new FunelralDao();
 

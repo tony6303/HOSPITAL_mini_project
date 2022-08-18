@@ -2,8 +2,8 @@ package com.example.funeralDirector.model.controller;
 
 import com.example.funeralDirector.model.dto.FunelralDto;
 import com.example.funeralDirector.service.FunelralService;
-//import com.example.funeralDirector.view.FuneralDirectorMenu;
 
+/** @author fla90*/
 public class FunelralController {
 	private final FunelralService funelralService = new FunelralService();
 	

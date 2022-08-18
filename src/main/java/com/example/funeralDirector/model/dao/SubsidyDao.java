@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import com.example.funeralDirector.model.dto.SubsidyDto;
 
+/** @author fla90*/
 public class SubsidyDao {
 	
 		
