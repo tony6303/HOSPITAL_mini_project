@@ -8,6 +8,7 @@ import java.util.Scanner;
 import com.example.medic.controller.PharController;
 import com.example.medic.model.dto.Medic;
 import com.example.medic.model.dto.PharmacyData;
+import com.example.utils.AsciiArtUtils;
 
 /**
  * @author 최영준
@@ -22,16 +23,14 @@ public class MedicMenu {
 
 	// MEMO 약사 메인메뉴
 	public void main() {
-		
-		
-		
+
 		System.out.println("      ______  _   _   ___  ___  ___  ___  ______  _____ __   __");
 		System.out.println("      | ___ \\| | | | / _ \\ |  \\/  | / _ \\ | ___ \\/  __ \\\\ \\ / /");
 		System.out.println("      | |_/ /| |_| |/ /_\\ \\| .  . |/ /_\\ \\| |_/ /| /  \\/ \\ V / ");
 		System.out.println("      |  __/ |  _  ||  _  || |\\/| ||  _  ||    / | |      \\ / ");
 		System.out.println("      | |    | | | || | | || |  | || | | || |\\ \\ | \\__/\\  | |  ");
 		System.out.println("      \\_|    \\_| |_/\\_| |_/\\_|  |_/\\_| |_/\\_| \\_| \\____/  \\_/");
-		
+
 		System.out.println(" _____  _   _  _____  _____  _____  _____  ___  ___ _____  _   _  _   _");
 		System.out.println("/  __ \\| | | ||  _  ||_   _|/  __ \\|  ___| |  \\/  ||  ___|| \\ | || | | |");
 		System.out.println("| /  \\/| |_| || | | |  | |  | /  \\/| |__   | .  . || |__  |  \\| || | | |");
@@ -39,14 +38,16 @@ public class MedicMenu {
 		System.out.println("| \\__/\\| | | |\\ \\_/ / _| |_ | \\__/\\| |___  | |  | || |___ | |\\  || |_| |");
 		System.out.println(" \\____/\\_| |_/ \\___/  \\___/  \\____/\\____/  \\_|  |_/\\____/ \\_| \\_/ \\___/ ");
 		while (true) {
-			System.out.print("*** 약사 메뉴선택 ***\n1. 재고관리\n2. 제조확인서 출력하기 " + "\n0. 메인으로 돌아가기\n메뉴 번호 선택 : ");
+			System.out.print("*** 약사 메뉴선택 ***\n1. 조제하기\n2. 의약품 재고관리" + "\n0. 메인으로 돌아가기\n메뉴 번호 선택 : ");
+			AsciiArtUtils.show("medicindex.txt");
+
 			int menu = sc.nextInt();
 			switch (menu) {
 			case 1:
-				callStock();
+				selectScription();
 				break;
 			case 2:
-				selectScription();
+				callStock();
 				break;
 			case 0:
 				System.out.println("약사 메뉴로 돌아갑니다.");
@@ -127,12 +128,12 @@ public class MedicMenu {
 		System.out.println("\n조회된 전체 회원정보는 다음과 같습니다.");
 		System.out.println("  상품번호   상품명        상품종류    상품가격         재고수량");
 
-//		System.out.println("│상품번호 \t 상품명 \t 상품종류 \t 상품가격 \t 재고수량 ");
 		System.out.println("│------------------------------------------------------│");
 
-		for (Medic m : list) { 
-			System.out.printf(" %3s  \t %5s \t %4s \t %6s \t %5s \t \n" , m.getPhaNo(),m.getPhaName(),m.getPhaType(), m.getPhaPrice() , m.getPhaStock() );
-			
+		for (Medic m : list) {
+			System.out.printf(" %3s  \t %5s \t %4s \t %6s \t %5s \t \n", m.getPhaNo(), m.getPhaName(), m.getPhaType(),
+					m.getPhaPrice(), m.getPhaStock());
+
 			System.out.println("│------------------------------------------------------│");
 		}
 
@@ -152,7 +153,6 @@ public class MedicMenu {
 
 		Medic medic = new Medic(phaName, phaStock);
 
-//       Medic medic = new Medic(12, "두통약", "etc", 3000, 10);
 		Pharcontroller.updatePha(medic);
 
 	}
@@ -223,6 +223,10 @@ public class MedicMenu {
 		// 재고량
 		int phaStock = printPD.getPhaStock();
 
+		// 처방량
+		int minusStock = phaPeriod * phaDayDosage;
+
+		System.out.println("=========== 조제를 완료하였습니다!===========");
 		System.out.println("=========== 조제내역서를 출력합니다 ===========");
 		System.out.println();
 		System.out.println();
@@ -231,20 +235,22 @@ public class MedicMenu {
 		System.out.println();
 		System.out.println("===============    조  제  내  역  서     ===============");
 		System.out.println("=======================================================");
-		System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-		System.out.println("┃ 환 ┃   이름     :             " + patientName + "                ┃");
-		System.out.println("┃ 자 ┃ 주민등록번호 :        " + patientNumber + "            ┃      ");
-		System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-		System.out.println("┃ 처방날짜  : " + preDate + "                            ┃");
-		System.out.println("┃ 의사이름  : " + doctorName + "                                     ┃");
-		System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-		System.out.println("┃   상품명     하루복용량    처방일수   1알가격     총약값  ┃ ");
-		System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-		System.out.println("┃   " + phaName + " :      " + phaDayDosage + "          " + phaPeriod + "      " + phaPrice
-				+ "      " + (phaPrice * phaDayDosage * phaPeriod) + " ┃");
-		System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+		System.out.println("┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃");
+		System.out.println("┃   환 ┃   이름     :             " + patientName + "                ");
+		System.out.println("┃   자 ┃ 주민등록번호 :        " + patientNumber + "                  ");
+		System.out.println("┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃");
+		System.out.println("   처방날짜  : " + preDate + "                            ");
+		System.out.println("   의사이름  : " + doctorName + "                                     ");
+		System.out.println("┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃");
+		System.out.println("   상품명     하루복용량    복용일수   1알가격     총약값   ");
+		System.out.println("┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃");
+		System.out.println("   " + phaName + " :      " + phaDayDosage + "          " + phaPeriod + "      " + phaPrice
+				+ "      " + (phaPrice * phaDayDosage * phaPeriod) + " ");
+		System.out.println("┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃");
 		System.out.println("");
 		System.out.println("");
+
+		Pharcontroller.updateScription(minusStock, phaName);
 
 	}
 
@@ -257,6 +263,18 @@ public class MedicMenu {
 	public void displayInfo(String message) {
 
 		System.out.println(message);
+	}
+
+	public void updatePre(Medic medic) {
+
+		System.out.println("==============================");
+		System.out.println("============조제완료============");
+		System.out.println("=== 처방량만큼 재고가 삭제 됩니다 ===");
+
+		System.out.println("입력하신 상품명 " + medic.getPhaName() + "의 남은 재고는 " + medic.getPhaStock() + "개 입니다.");
+		System.out.println();
+		System.out.println();
+		System.out.println("==================================");
 	}
 
 }

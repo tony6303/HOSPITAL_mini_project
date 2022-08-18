@@ -15,6 +15,8 @@ public class Prescription {
 	private int phaDayDosage;
 	private int phaPeriod;
 	private String doctorName;
+	
+	
 
 	public int getPatientNo() {
 		return patientNo;

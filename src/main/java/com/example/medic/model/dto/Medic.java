@@ -28,15 +28,6 @@ public class Medic {
 		super();
 	}
 	
-// MEMO 기본 출력값  사용하지 않은 메소드
-//    @Override
-//    public String toString() {
-//        return "   "+ phaNo +
-//                "       "+ phaName + "    " +
-//                 phaType + "      "+
-//                phaPrice + "       "+
-//                phaStock + "       ";
-//    }
 
 	public int getPhaNo() {
 		return phaNo;
