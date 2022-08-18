@@ -8,11 +8,11 @@ import com.example.doctor.service.DoctorService;
 public class DoctorController {
 	private final DoctorService doctorService = new DoctorService();
 	
-	public List<MedicalRecordsDTO> searchRecords(String resNo) {
-		return doctorService.checkRecords(resNo);
+	public List<MedicalRecordsDTO> searchRecords(String resName,String resNo) {
+		return doctorService.checkRecords(resName,resNo);
 	}
-	public int writeRecords(String str,String diseaseName) {
-		return doctorService.writeRecords(str,diseaseName);
+	public int writeRecords(String str,String resNo,String diseaseName) {
+		return doctorService.writeRecords(str,resNo,diseaseName);
 	}
 	public int writePha(String str,String pha,int period,int day,String doctorName) {
 		return doctorService.writePrescribtion(str,pha,period,day,doctorName);
