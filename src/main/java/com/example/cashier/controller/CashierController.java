@@ -6,6 +6,11 @@ import com.example.cashier.model.dto.Price;
 import com.example.cashier.service.CashierService;
 import com.example.patient.model.dto.Patient;
 
+
+/**
+ * @author cpzhr(박경민)
+ *
+ */
 public class CashierController {
 	
 	private final CashierService cashierService = new CashierService();
@@ -29,6 +34,11 @@ public class CashierController {
 
 	public Patient checkResNo(String resNo) {
 		return cashierService.selectByResNo(resNo);
+	}
+
+
+	public int selectPriceByDiseaseName(String disName) {
+		return cashierService.selectPriceByDiseaseName(disName);
 	}
 	
 	

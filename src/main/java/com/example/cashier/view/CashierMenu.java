@@ -9,6 +9,10 @@ import com.example.cashier.model.dto.Price;
 import com.example.patient.model.dto.Patient;
 
 
+/**
+ * @author cpzhr(박경민)
+ *
+ */
 public class CashierMenu {
 	private final Scanner sc = new Scanner(System.in);  // 스캐너 객체 sc로 입력받음 접근제한자는 private이며 final로인해 한번 초기화된 변수는 변경할수없는 상수값이 됨.
 	private final CashierController cc = new CashierController(); // 컨트롤러에 있는 클래스명을 이용한 객체 cc 생성
@@ -49,13 +53,13 @@ public class CashierMenu {
 		}
 
 	}
-
+	//급여를 정수형으로 입력받아 salary에 넣고 넣은값을 result로 초기화 하여 if문 돌림
 	private void cashierFire() {
-		System.out.println("수납원의 급여를 입력하세요 : -");
+		System.out.println("수납원의 최대 급여를 입력하세요 : ");
 		int salary = sc.nextInt();
 		int result = cc.salaryselect(salary);
 		if (result > 0) {
-			System.out.println("나가주세요");
+			System.out.println("병원의 사정으로 함께하지 못하게 되었습니다.");
 			System.out.println(result);
 		}else {
 			System.out.println(result);
@@ -63,20 +67,26 @@ public class CashierMenu {
 		}
 		
 	}
-
+	
+	//병명을 입력하여 dsiName에 저장 후 priceUpdate의 내용을 result에 저장하고 반환받은 행의 갯수로 if문 돌림
 	private void priceUpdate() {
-		System.out.println("진료비를 바꿀 병명을 입력하세요 : ");
+		System.out.println("진료비가 인상될 병명을 입력하세요 : ");
 		sc.nextLine();
 		String disName = sc.nextLine();
+		
+		int beforePrice = priceSelect(disName);
 		int result = cc.priceUpdate(disName);
+		int afterPrice = priceSelect(disName);
+		
 		if(result > 0) {
-			System.out.println("진료비가 변경되었습니다.");
+			System.out.println("진료비가"+beforePrice+ "에서 " + afterPrice+ "로 인상되었습니다.");
 		}else {
-			System.out.println("질병명을 제대로 입력해주세요.");
+			System.out.println("병명을 제대로 입력해주세요.");
 		}
 		
 	}
 
+	// 주민번호를 입력하여 resNo에 저장하고 pirce의 내용을 ca에 저장하고 dto에 있은 내용을 불러서 출력
 	private void clinicCost() {
 		System.out.print("주민번호를 입력하세요 : ");
 		sc.nextLine();
@@ -92,8 +102,8 @@ public class CashierMenu {
 
 
 	}
-
-	private void registerReservation() {  //예약등록 메서드 생성
+	//입력받은 값을 resNo에 넣고 excuteQuery를 실행해서 
+	private void registerReservation() {  
 		System.out.print("주민번호를 입력하세요 : ");
 		sc.nextLine();
 		String resNo = sc.nextLine();
@@ -112,6 +122,11 @@ public class CashierMenu {
 		}
 		
 		
+	}
+	
+	private int priceSelect(String disName) {
+		int priceSelct = cc.selectPriceByDiseaseName(disName);
+		return priceSelct;
 	}
 	
 	

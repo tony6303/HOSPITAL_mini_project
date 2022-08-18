@@ -15,6 +15,7 @@ public class Price {
 		// TODO Auto-generated constructor stub
 	}
 
+
 	public Price(int patient_id, String patient_no, String patient_name, Date mr_date, String disease_name, int price) {
 		this.patient_id = patient_id;
 		this.patient_name = patient_name;
