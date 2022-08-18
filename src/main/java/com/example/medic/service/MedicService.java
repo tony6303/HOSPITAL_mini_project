@@ -13,7 +13,7 @@ import com.example.medic.view.MedicMenu;
  */
 public class MedicService {
 	MedicDao medicDao = new MedicDao();
-	
+
 	// =================DAO에서 받은 정보의 값을 조작 ===============
 	// MEMO dao에서 받은 sql 내용이 있는지 확인하고 컨트롤러로 보내주는곳
 
@@ -73,6 +73,7 @@ public class MedicService {
 	public void printScript(int patientNumber) {
 		MedicMenu menu = new MedicMenu();
 
+		//printPD DAO에서 받아온 데이터
 		PharmacyData printPD = medicDao.printPD(patientNumber);
 		// 처방전 번호에 해당하는 내용이 있으면 display 함수 출력
 		if (!(printPD == null)) {
@@ -85,6 +86,15 @@ public class MedicService {
 
 	}
 
+	// 처방전 개수만큼 상품수를 변경하고 다시 조회
+	public void updateSc(int minusStock, String phaName) {
+		MedicMenu menu = new MedicMenu();
+
+		Medic medic = medicDao.updateScr(minusStock, phaName);
+		
+		menu.updatePre(medic);
+	}
+
 	// MEMO 상품을 제거하는 함수!
 	public void deletePha(String phaName) {
 		MedicMenu menu = new MedicMenu();
@@ -95,12 +105,11 @@ public class MedicService {
 
 			// 상품이 존재하고 삭제를 한다.
 		} else if (abc == 1) {
-			menu.displayInfo("해당 상품 " + phaName + "을(를) 삭제하였습니다.");
+			menu.displayInfo("입력하신 상품 " + phaName + "을(를) 삭제하였습니다.");
 		} else if (abc > 1) {
 			menu.displayInfo(abc + "가지의 중복된 이름의 상품을 제거하였습니다.");
 
 		}
-		System.out.println("입력이름" + phaName);
 
 	}
 

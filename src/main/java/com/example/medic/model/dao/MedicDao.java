@@ -116,7 +116,7 @@ public class MedicDao {
 		try {
 
 			Connection connection = getConnection();
-			System.out.println("두번째 연결완료");
+//			System.out.println("두번째 연결완료");
 			PreparedStatement pstmt2 = connection.prepareStatement(sql2);
 			pstmt2.setString(1, medic.getPhaName());
 			ResultSet rset2 = pstmt2.executeQuery();
@@ -192,6 +192,53 @@ public class MedicDao {
 		return pharmacyData;
 
 	}
+
+	// 처방전 출력후 업데이트 하는것,  조회하는 것 2개를 구현해야함
+	
+	public Medic updateScr(int minusStock, String phaName) {
+		String sql = "UPDATE PHA_STOCK SET PHA_STOCK = (PHA_STOCK - ?) WHERE PHA_NAME = ? ";
+
+		try {
+			Connection connection = getConnection();
+			PreparedStatement pstmt = connection.prepareStatement(sql);
+			pstmt.setInt(1, minusStock);
+			pstmt.setString(2, phaName);
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+
+		}
+		
+		
+		// MEMO 처방전 이후 재고 내리고 다시 총재고 값을 반환
+		String sql2 = "SELECT * FROM PHA_STOCK WHERE PHA_NAME = ?";
+		Medic medic2 = null;
+		try {
+
+			Connection connection = getConnection();
+			PreparedStatement pstmt2 = connection.prepareStatement(sql2);
+			pstmt2.setString(1, phaName);
+			ResultSet rset2 = pstmt2.executeQuery();
+			while (rset2.next()) {
+				String title1 = rset2.getString("PHA_NAME");
+				int totalCount = rset2.getInt("PHA_STOCK");
+				medic2 = new Medic(title1, totalCount);
+
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+		}
+		return medic2;
+	}
+
+	}
+	
+	
 	
 
 //	// MEMO LOCAL DB 연결 데이터 
@@ -203,4 +250,4 @@ public class MedicDao {
 //		return DriverManager.getConnection(url, username, password);
 //	}
 
-}
+

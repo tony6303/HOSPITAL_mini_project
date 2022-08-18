@@ -38,4 +38,10 @@ public class PharController {
 		
 	}
 
+	public void updateScription(int minusStock, String phaName) {
+		medicService.updateSc(minusStock,phaName);
+		
+	}
+
+
 }
