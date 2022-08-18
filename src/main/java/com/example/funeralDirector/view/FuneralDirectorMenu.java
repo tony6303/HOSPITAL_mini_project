@@ -32,10 +32,10 @@ public class FuneralDirectorMenu {
 
 			switch (menunum) {
 			case 1:
-				사망자명단();
+				deathList();
 				break;
 			case 2:
-				부조금관리();
+				subsidyManagement();
 				break;
 			case 0:
 				return;
@@ -47,7 +47,7 @@ public class FuneralDirectorMenu {
 	}
 
 	//서브메뉴. 사망자 명단 메뉴
-	public void 사망자명단() {
+	public void deathList() {
 		while (true) {
 			System.out.println("=====사망자 명단=====");
 			System.out.println("1.사망자 조회");
@@ -82,7 +82,7 @@ public class FuneralDirectorMenu {
 	
 
 	//서브메뉴.  부조금 관리 메뉴
-	public void 부조금관리() {
+	public void subsidyManagement() {
 		while (true) {
 			System.out.println("=====부조금 관리=====");
 			System.out.println("1.부조금 총 조회");
@@ -99,6 +99,7 @@ public class FuneralDirectorMenu {
 			System.out.println();
 			System.out.println("메뉴 번호를 선택하세요");
 			int numu3num = s.nextInt();
+			
 			switch (numu3num) {
 			case 1:
 				SubsidyList();
@@ -140,6 +141,11 @@ public class FuneralDirectorMenu {
 			
 			FunelralDto funelralDto = fc.selectOne(patientName, patientNo);
 			
+			if(funelralDto == null) {
+				System.out.println(patientName + "은 살아있거나 잘못 입력하셨습니다.");
+				return;
+			}
+			
 			System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 			System.out.println("사망자 아이디 : "+funelralDto.getFunelralId());
 			System.out.println("사망 날짜 : "+funelralDto.getDateDeath());
@@ -178,8 +184,8 @@ public class FuneralDirectorMenu {
 		public void DeathList(List<FunelralDto> list) {
 			System.out.println("사망자 명단 전체 정보조회");
 			for (FunelralDto m : list) {
-				System.out.println(list.indexOf(m)+1);
 				System.out.println("");
+				System.out.println(list.indexOf(m)+1);
 				System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 				System.out.println();
 				System.out.println("사망자 정보 : " +"사망자이름 : "+ m.getPatientName()+" | "+"사망자 ID : "+m.getFunelralId()+" | "+"사망날짜 : "+m.getDateDeath()+" | "+"사망사유 : "+m.getDeathReason()+" | "+"환자 ID : "+m.getPatientId()+" | ");
@@ -277,6 +283,9 @@ public class FuneralDirectorMenu {
 		System.out.println();
 		
 		int result = sdc.updateDeath(price, info, bank, name);
+		
+		
+		
 		if(result>0) {
 			System.out.println("부조금 정보가 수정 완료 되었습니다");
 			System.out.println();
@@ -289,7 +298,7 @@ public class FuneralDirectorMenu {
 			System.out.println("계좌 은행 : "+bank);
 			System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 		}else {
-			System.out.println("실패");
+			System.out.println("잘못 된 정보를 입력하였습니다");
 		}
 	}
 	
@@ -309,30 +318,30 @@ public class FuneralDirectorMenu {
 		if(result > 0) {
 			System.out.println("부조금 정보가 삭제 완료 되었습니다");
 		}else {
-			System.out.println("실패");
+			System.out.println("잘못 된 정보를 입력하였습니다");
 		}
 	}
 	
 	//부조금 관리 5.환자 이름별 부조금 총 조회
-			public void selectBypatient() {
-				System.out.println("부조금이 궁금한 환자 이름를 입력하세요");
-				String name = s.next();
+		public void selectBypatient() {
+			System.out.println("부조금이 궁금한 환자 이름를 입력하세요");
+			String name = s.next();
+			
+			ArrayList<SubsidyDto> list;
+			list = sdc.selectBypatient(name);
+			System.out.println("");
+			
+			for(int i = 0;i<list.size();i++) {
 				
-				ArrayList<SubsidyDto> list;
-				list = sdc.selectBypatient(name);
-				System.out.println("");
-				
-				for(int i = 0;i<list.size();i++) {
-					
-					System.out.println(i);
-					System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-					System.out.println(list.get(i).getSubsidyName());
-					System.out.println(list.get(i).getSubsidy());
-					System.out.println(list.get(i).getAccount_number());
-					System.out.println(list.get(i).getAccount_bank());
-					System.out.println(list.get(i).getFunelral_id());
-					System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-					//System.out.println(list.get(i).getClass());
+				System.out.println(i);
+				System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+				System.out.println(list.get(i).getSubsidyName());
+				System.out.println(list.get(i).getSubsidy());
+				System.out.println(list.get(i).getAccount_number());
+				System.out.println(list.get(i).getAccount_bank());
+				System.out.println(list.get(i).getFunelral_id());
+				System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+				//System.out.println(list.get(i).getClass());
 				}
 		}
 }
