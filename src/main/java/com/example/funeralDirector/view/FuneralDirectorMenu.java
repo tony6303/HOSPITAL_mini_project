@@ -153,8 +153,19 @@ public class FuneralDirectorMenu {
 		String deathReason = s.next();
 		System.out.print("추가할 사망자 환자아이디을 입력하세요");
 		int patientId = s.nextInt();
+		System.out.println();
+		System.out.println();
+		System.out.println();
 
 		fc.registerDeath(funelralId2,deathReason, patientId);
+		
+		
+		System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+		System.out.println("사망자 아이디 : "+ funelralId2);
+		//System.out.println("사망 날짜 : "+ deathReason);sysdate()
+		System.out.println("사망 사유 : "+ deathReason);
+		System.out.println("환자 아이디 : "+ patientId);
+		System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 	}
 
 	
@@ -163,12 +174,13 @@ public class FuneralDirectorMenu {
 		public void DeathList(List<FunelralDto> list) {
 			System.out.println("사망자 명단 전체 정보조회");
 			for (FunelralDto m : list) {
+				System.out.println(list.indexOf(m)+1);
 				System.out.println("");
-				System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+				System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 				System.out.println();
-				System.out.println("사망자 정보 : " + m.getPatientName()+"        "+m.getDateDeath()+"        "+m.getDeathReason()+"        ");
+				System.out.println("사망자 정보 : " +"사망자이름 : "+ m.getPatientName()+" | "+"사망자 ID : "+m.getFunelralId()+" | "+"사망날짜 : "+m.getDateDeath()+" | "+"사망사유 : "+m.getDeathReason()+" | "+"환자 ID : "+m.getPatientId()+" | ");
 				System.out.println();
-				System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+				System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 				
 			}
 		}

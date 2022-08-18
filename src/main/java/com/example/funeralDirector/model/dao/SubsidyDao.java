@@ -43,35 +43,7 @@ public class SubsidyDao {
 		}
 		
 		
-		//환자이름 별 부조금 전체 정보 조회 
-				public ArrayList<SubsidyDto> selectBypatient(String patient_name){
-					
-					
-					String sql = "SELECT SUBSIDY_NAME, SUBSIDY, ACCOUNT_INFO, ACCOUNT_BANK ,A.FUNELRAL_ID FROM SUBSIDY A LEFT JOIN FUNELRAL B ON A.FUNELRAL_ID = B.FUNELRAL_ID LEFT JOIN PATIENT C ON B.FUNELRAL_ID = C.PATIENT_ID WHERE C.PATIENT_NAME = ? ";
-					
-					
-					ArrayList<SubsidyDto> list = new ArrayList<>();
-					
-					try (PreparedStatement pstmt = getConnection().prepareStatement(sql)){
-						pstmt.setString(1,patient_name);
-						
-						ResultSet rset = pstmt.executeQuery();
-						System.out.println(rset);
-						while(rset.next()) {
-							SubsidyDto sd = new SubsidyDto();
-							sd.setSubsidyName(rset.getString(1));
-							sd.setSubsidy(rset.getInt(2));
-							sd.setAccount_number(rset.getString(3));
-							sd.setAccount_bank(rset.getString(4));
-							sd.setFunelral_id(rset.getInt(5));
-							
-							list.add(sd);
-						}
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-					return list;
-				}
+		
 		
 		
 		//부조금 추가 
@@ -131,6 +103,36 @@ public class SubsidyDao {
 			throw new RuntimeException(e);
 		}
 	}
+		
+		
+		//환자이름 별 부조금 전체 정보 조회 
+		public ArrayList<SubsidyDto> selectBypatient(String patient_name){
+			
+			
+			String sql = "SELECT SUBSIDY_NAME, SUBSIDY, ACCOUNT_INFO, ACCOUNT_BANK ,A.FUNELRAL_ID FROM SUBSIDY A LEFT JOIN FUNELRAL B ON A.FUNELRAL_ID = B.FUNELRAL_ID LEFT JOIN PATIENT C ON B.FUNELRAL_ID = C.PATIENT_ID WHERE C.PATIENT_NAME = ? ";
+			
+			
+			ArrayList<SubsidyDto> list = new ArrayList<>();
+			
+			try (PreparedStatement pstmt = getConnection().prepareStatement(sql)){
+				pstmt.setString(1,patient_name);
+				
+				ResultSet rset = pstmt.executeQuery();
+				while(rset.next()) {
+					SubsidyDto sd = new SubsidyDto();
+					sd.setSubsidyName(rset.getString(1));
+					sd.setSubsidy(rset.getInt(2));
+					sd.setAccount_number(rset.getString(3));
+					sd.setAccount_bank(rset.getString(4));
+					sd.setFunelral_id(rset.getInt(5));
+					
+					list.add(sd);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return list;
+		}
 }
 
 

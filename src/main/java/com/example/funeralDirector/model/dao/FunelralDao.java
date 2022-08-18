@@ -86,6 +86,9 @@ public class FunelralDao {
 				fd.setPatientName(rset.getString("PATIENT_NAME"));
 				fd.setDateDeath(rset.getDate("DATE_DEATH"));
 				fd.setDeathReason(rset.getString("DEATH_REASON"));
+				fd.setPatientId(rset.getInt("PATIENT_ID"));
+				fd.setFunelralId(rset.getInt("FUNELRAL_ID"));
+				
 				
 				list.add(fd);
 			}
