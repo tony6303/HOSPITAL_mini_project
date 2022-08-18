@@ -23,7 +23,7 @@ public class OperationDTO {
 
 	@Override
 	public String toString() {
-		return "수술 번호 : " +op_no+" 날짜 : " +op_date+" 특이사항 : " +uniqueness+"\n수술 이름 : " +op_name+" 의사 번호 : " +doctor_id+"환자 아이디 : " +patient_id;
+		return "수술 번호 : " +op_no+"| 날짜 : " +op_date+"| 특이사항 : " +uniqueness+"\n수술 이름 : " +op_name+"| 의사 번호 : " +doctor_id+"| 환자 아이디 : " +patient_id;
 	}
 
 	public int getOp_no() {

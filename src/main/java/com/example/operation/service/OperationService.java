@@ -13,17 +13,16 @@ public class OperationService {
 		return opDao.insertOp(day,uniqueness,op_name,doctorName,patientName);
 	}
 
-	public List<OperationDTO> searchOp(String patientName) {
-		return opDao.searchOp(patientName);
-		
+	public List<OperationDTO> searchOp(String patientName,String patientNo) {
+		return opDao.searchOp(patientName,patientNo);
 	}
 
-	public int updateOp(String patientName, String date,String newDate) {
-		return opDao.updateOp(patientName,date,newDate);
+	public int updateOp(String patientName,String patientNo, String date,String newDate) {
+		return opDao.updateOp(patientName,patientNo,date,newDate);
 	}
 
-	public int deleteOp(String patientName, String date) {
-		return opDao.deleteOp(patientName,date);
+	public int deleteOp(String patientName,String patientNo, String date) {
+		return opDao.deleteOp(patientName,patientNo,date);
 	}
 	
 	

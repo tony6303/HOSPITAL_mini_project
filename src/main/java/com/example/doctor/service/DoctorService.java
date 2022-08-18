@@ -8,12 +8,12 @@ import com.example.doctor.model.DTO.MedicalRecordsDTO;
 public class DoctorService {
 	MedicalRecordsDao mrDao = new MedicalRecordsDao();
 	
-	public List<MedicalRecordsDTO> checkRecords(String resName) {
-		return  mrDao.checkRecords(resName);
+	public List<MedicalRecordsDTO> checkRecords(String resName,String resNo) {
+		return  mrDao.checkRecords(resName,resNo);
 		
 	}
-	public int writeRecords(String str,String diseaseName) {
-		return mrDao.writeRecords(str,diseaseName);
+	public int writeRecords(String str,String resNo,String diseaseName) {
+		return mrDao.writeRecords(str,resNo,diseaseName);
 	}
 
 	public int writePrescribtion(String str, String pha, int period, int day,String doctorName) {

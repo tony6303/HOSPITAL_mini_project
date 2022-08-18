@@ -73,9 +73,11 @@ public class DoctorMenu {
 			System.out.print("환자에 이름을 입력하세요: ");
 			sc.nextLine();
 			String str = sc.nextLine();
+			System.out.print("환자의 주민번호를 입력하세요 : ");
+			String resNo = sc.nextLine();
 			System.out.print("환자의 병명을 입력하세요: ");
 			String diseaseName = sc.nextLine();
-			int result = pc.writeRecords(str,diseaseName);
+			int result = pc.writeRecords(str,resNo,diseaseName);
 			if(result>0) {
 				System.out.println("작성 성공");
 			}else {
@@ -88,7 +90,10 @@ public class DoctorMenu {
 	    	System.out.print("환자에 이름을 입력하세요:");
 	    	sc.nextLine();
 	    	String resName = sc.nextLine();
-	    	List<MedicalRecordsDTO> mrr = pc.searchRecords(resName);
+	    	System.out.println("환자의 주민번호를 입력하세요 : ");
+	    	String resNo = sc.nextLine();
+	    	List<MedicalRecordsDTO> mrr = pc.searchRecords(resName,resNo);
+	    	
 	    	for(int i = 0; i<mrr.size();i++) {
 				System.out.print(mrr.get(i).toString());
 			}

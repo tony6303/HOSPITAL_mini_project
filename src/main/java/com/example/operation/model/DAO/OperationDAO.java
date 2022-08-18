@@ -33,7 +33,7 @@ public class OperationDAO {
 	 */
 	public int getColumnOP() {
 	        try (Statement statement = JdbcTemplate.getConnection().createStatement()) {
-	            ResultSet rs = statement.executeQuery("select count(1) from OPERATION");
+	            ResultSet rs = statement.executeQuery("select MAX(OP_NO) from OPERATION");
 	            rs.next();
 	            return rs.getInt(1);
 	        } catch (SQLException e) {
@@ -58,11 +58,12 @@ public class OperationDAO {
         }
 	}
 
-	public List<OperationDTO> searchOp(String patientName) {
-		String sql = "SELECT OP_NO,OP_DATE,UNIQUENESS,OP_NAME,DOCTOR_ID,A.PATIENT_ID FROM OPERATION A LEFT JOIN PATIENT B ON A.PATIENT_ID = B.PATIENT_ID WHERE B.PATIENT_NAME = ?"; 
+	public List<OperationDTO> searchOp(String patientName,String patientNo) {
+		String sql = "SELECT OP_NO,OP_DATE,UNIQUENESS,OP_NAME,DOCTOR_ID,A.PATIENT_ID FROM OPERATION A LEFT JOIN PATIENT B ON A.PATIENT_ID = B.PATIENT_ID WHERE B.PATIENT_NAME = ? AND B.PATIENT_NO = ?"; 
 		
 		try (PreparedStatement pstmt = JdbcTemplate.getConnection().prepareStatement(sql)) {
             pstmt.setString(1, patientName);
+            pstmt.setString(2, patientNo);
             ResultSet rset = pstmt.executeQuery();
             List<OperationDTO> orr = new ArrayList<>();    
             
@@ -76,12 +77,13 @@ public class OperationDAO {
         }
 	}
 
-	public int updateOp(String patientName, String date,String newDate) {
-		String sql = "UPDATE OPERATION SET OP_DATE = TO_TIMESTAMP(?) WHERE OP_DATE = ? AND PATIENT_ID = (SELECT PATIENT_ID FROM PATIENT WHERE PATIENT_NAME = ?)";
+	public int updateOp(String patientName,String patientNo, String date,String newDate) {
+		String sql = "UPDATE OPERATION SET OP_DATE = TO_TIMESTAMP(?) WHERE OP_DATE = ? AND PATIENT_ID = (SELECT PATIENT_ID FROM PATIENT WHERE PATIENT_NAME = ? AND PATIENT_NO = ?) ";
 		try (PreparedStatement pstmt = JdbcTemplate.getConnection().prepareStatement(sql)) {
 			pstmt.setString(1,newDate);
             pstmt.setString(2, date);
 			pstmt.setString(3, patientName);
+			pstmt.setString(4, patientNo);
             
 			JdbcTemplate.getConnection().commit();
             return pstmt.executeUpdate();
@@ -90,11 +92,12 @@ public class OperationDAO {
         }
 	}
 
-	public int deleteOp(String patientName, String date) {
-		String sql = "DELETE FROM OPERATION WHERE PATIENT_ID = (SELECT PATIENT_ID FROM PATIENT WHERE PATIENT_NAME = ?) AND OP_DATE = TO_TIMESTAMP(?)";
+	public int deleteOp(String patientName,String patientNo, String date) {
+		String sql = "DELETE FROM OPERATION WHERE PATIENT_ID = (SELECT PATIENT_ID FROM PATIENT WHERE PATIENT_NAME = ? AND PATIENT_NO = ?) AND OP_DATE = TO_TIMESTAMP(?)";
 		try (PreparedStatement pstmt = JdbcTemplate.getConnection().prepareStatement(sql)) {
 			pstmt.setString(1,patientName);
-            pstmt.setString(2, date);
+			pstmt.setString(2, patientNo);
+            pstmt.setString(3, date);
             
             JdbcTemplate.getConnection().commit();
             return pstmt.executeUpdate();
