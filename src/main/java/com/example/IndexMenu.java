@@ -18,6 +18,7 @@ public class IndexMenu {
 	private final MedicMenu mm = new MedicMenu();
 	private final ProductMenu prom = new ProductMenu();
 	private final CashierMenu cm = new CashierMenu();
+	private final FuneralDirectorMenu fdm = new FuneralDirectorMenu();
 
 	public void mainMenu() {
 		while (true) {
@@ -36,9 +37,10 @@ public class IndexMenu {
 				mm.main();
 				break;
 			case 5:
-				prom.main();
+				fdm.main();
 				break;
 			case 6:
+				prom.main();
 				break;
 			case 0:
 				System.out.println("프로그램 종료");
