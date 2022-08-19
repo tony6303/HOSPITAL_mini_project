@@ -26,22 +26,19 @@ public class PharController {
 	public void insertNewPhar(Medic medic) {
 		medicService.insertPha(medic);
 	}
-	
+
 	// MEMO - 조제확인서 출력하는 메소드 호출
 	// 컨트롤러에서는 서비스에 있는 메소드를 호출한다.
 	public void PrintScription(int patientNumber) {
 		medicService.printScript(patientNumber);
 	}
+
+
+
 	// MEMO - 해당 품목을 날리는 메소드를 호출
 	public void deletePha(String phaName) {
 		medicService.deletePha(phaName);
-		
-	}
 
-	public void updateScription(int minusStock, String phaName) {
-		medicService.updateSc(minusStock,phaName);
-		
 	}
-
 
 }

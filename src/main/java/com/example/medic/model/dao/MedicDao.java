@@ -1,8 +1,9 @@
 package com.example.medic.model.dao;
 
+import static com.example.config.JdbcTemplate.getConnection;
+
 import java.sql.Connection;
 import java.sql.Date;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,7 +12,6 @@ import java.util.ArrayList;
 
 import com.example.medic.model.dto.Medic;
 import com.example.medic.model.dto.PharmacyData;
-import static com.example.config.JdbcTemplate.getConnection;
 
 /**
  * @author 최영준
@@ -153,7 +153,8 @@ public class MedicDao {
 
 	// MEMO 처방전 데이터 전부를 받아서 출력하기
 	public PharmacyData printPD(int patientNumber) {
-		String sql = "SELECT A.PRE_NO, C.PATIENT_NAME, C.PATIENT_NO, B.DOCTOR_NAME, A.PRE_DATE, D.PHA_NAME, D.PHA_TYPE, A.PHA_PERIOD,A.PHA_DAY_DOSAGE,D.PHA_PRICE,D.PHA_STOCK "
+		String sql = "SELECT A.PRE_NO, C.PATIENT_NAME, C.PATIENT_NO, B.DOCTOR_NAME, A.PRE_DATE, "
+				+ "D.PHA_NAME, D.PHA_TYPE, A.PHA_PERIOD,A.PHA_DAY_DOSAGE,D.PHA_PRICE,D.PHA_STOCK "
 				+ " FROM PRESCRIPTION A " + " LEFT JOIN DOCTOR B ON A.DOCTOR_ID = B.DOCTOR_ID "
 				+ " LEFT JOIN PATIENT C ON A.PATIENT_ID = C.PATIENT_ID "
 				+ " LEFT JOIN PHA_STOCK D ON A.PHA_NO = D.PHA_NO " + "WHERE A.PRE_NO = ?";
@@ -216,7 +217,6 @@ public class MedicDao {
 		String sql2 = "SELECT * FROM PHA_STOCK WHERE PHA_NAME = ?";
 		Medic medic2 = null;
 		try {
-
 			Connection connection = getConnection();
 			PreparedStatement pstmt2 = connection.prepareStatement(sql2);
 			pstmt2.setString(1, phaName);
@@ -224,14 +224,10 @@ public class MedicDao {
 			while (rset2.next()) {
 				String title1 = rset2.getString("PHA_NAME");
 				int totalCount = rset2.getInt("PHA_STOCK");
-				medic2 = new Medic(title1, totalCount);
-
-			}
-
-		} catch (SQLException e) {
+				medic2 = new Medic(title1, totalCount);			}		}
+		catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-
 		}
 		return medic2;
 	}

@@ -253,6 +253,18 @@ public class MedicMenu {
 		Pharcontroller.updateScription(minusStock, phaName);
 
 	}
+	
+	public void updatePre(Medic medic) {
+
+		System.out.println("==============================");
+		System.out.println("============조제완료============");
+		System.out.println("=== 처방량만큼 재고가 삭제 됩니다 ===");
+
+		System.out.println("입력하신 상품명 " + medic.getPhaName() + "의 남은 재고는 " + medic.getPhaStock() + "개 입니다.");
+		System.out.println();
+		System.out.println();
+		System.out.println("==================================");
+	}
 
 	// MEMO 잘못된 입력값에 대한 실패출력문
 	public void displayError(String message) {
@@ -265,16 +277,6 @@ public class MedicMenu {
 		System.out.println(message);
 	}
 
-	public void updatePre(Medic medic) {
 
-		System.out.println("==============================");
-		System.out.println("============조제완료============");
-		System.out.println("=== 처방량만큼 재고가 삭제 됩니다 ===");
-
-		System.out.println("입력하신 상품명 " + medic.getPhaName() + "의 남은 재고는 " + medic.getPhaStock() + "개 입니다.");
-		System.out.println();
-		System.out.println();
-		System.out.println("==================================");
-	}
 
 }
