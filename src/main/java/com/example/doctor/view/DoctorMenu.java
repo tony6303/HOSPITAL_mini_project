@@ -7,7 +7,13 @@ import com.example.doctor.controller.DoctorController;
 import com.example.doctor.model.DTO.MedicalRecordsDTO;
 import com.example.operation.view.OperationMenu;
 
-
+/**
+ * <pre>
+ * Class : OperationMenu
+ * Comment : 수술 일정 메인 화면
+ * </pre>
+ * @author 이규철
+ * */
 public class DoctorMenu {
 	 private final Scanner sc = new Scanner(System.in);
 	    private final DoctorController pc = new DoctorController();
@@ -40,11 +46,13 @@ public class DoctorMenu {
 	        }
 	    }
 	    
-	    private void operationMain() {
+	    /** @author 이규철 **/
+	    private void operationMain() {  // 수술 메인 화면 연결
 			om.main();
 		}
 
-		private void writePha() {
+	    /** @author 이규철 **/
+		private void writePha() {  // 처방전 작성 화면
 			// TODO Auto-generated method stub
 			System.out.println("===== 처방전 작성 =====");
 			System.out.print("환자 이름을 입력하세요 : ");
@@ -59,7 +67,7 @@ public class DoctorMenu {
 			sc.nextLine();
 			System.out.print("의사 이름를 입력하세요 : ");
 			String doctorName = sc.nextLine();
-			int result = pc.writePha(str, pha, period, day,doctorName);
+			int result = pc.writePha(str, pha, period, day,doctorName);  // 이름,약,하루 복용량, 복용 주기, 의사 이름을 입력 받는다.
 			if(result>0) {
 				System.out.println("작성 성공");
 			}else {
@@ -67,7 +75,8 @@ public class DoctorMenu {
 			}
 		}
 
-		private void writeMR() {
+		/** @author 이규철 **/
+		private void writeMR() {  // 진료 기록 작성 화면
 			// TODO Auto-generated method stub
 			System.out.println("===== 진료 기록 작성 =====");
 			System.out.print("환자에 이름을 입력하세요: ");
@@ -77,7 +86,7 @@ public class DoctorMenu {
 			String resNo = sc.nextLine();
 			System.out.print("환자의 병명을 입력하세요: ");
 			String diseaseName = sc.nextLine();
-			int result = pc.writeRecords(str,resNo,diseaseName);
+			int result = pc.writeRecords(str,resNo,diseaseName); // 이름, 주민번호, 병명 입력받는다.
 			if(result>0) {
 				System.out.println("작성 성공");
 			}else {
@@ -85,17 +94,20 @@ public class DoctorMenu {
 			}
 		}
 
-		private void searchMR() {
+		/** @author 이규철 **/
+		private void searchMR() { // 진료 기록 열람 화면
 	    	System.out.println("===== 진료 기록 열람=====");
 	    	System.out.print("환자에 이름을 입력하세요:");
 	    	sc.nextLine();
 	    	String resName = sc.nextLine();
 	    	System.out.println("환자의 주민번호를 입력하세요 : ");
 	    	String resNo = sc.nextLine();
-	    	List<MedicalRecordsDTO> mrr = pc.searchRecords(resName,resNo);
+	    	List<MedicalRecordsDTO> mrr = pc.searchRecords(resName,resNo);   // 이름, 주민번호 입력 받는다.
 	    	
+	    	if(mrr != null) {
 	    	for(int i = 0; i<mrr.size();i++) {
 				System.out.print(mrr.get(i).toString());
 			}
+	    	}
 	    }
 	}
