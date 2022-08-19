@@ -8,6 +8,13 @@ import com.example.operation.controller.OperationController;
 import com.example.operation.model.DTO.OperationDTO;
 
 
+/**
+ * <pre>
+ * Class : OperationMenu
+ * Comment : 수술 일정 메인 화면
+ * </pre>
+ * @author 이규철
+ * */
 public class OperationMenu {
 	 private final Scanner sc = new Scanner(System.in);
 	 private OperationController oc = new OperationController();
@@ -40,6 +47,7 @@ public class OperationMenu {
 	        }
 	    }
 
+	    /** @author 이규철 **/
 		private void deleteOp() {   // 삭제 컨트롤 호출
 			System.out.print("환자의 이름을 입력하세요 : "); 
 			sc.nextLine();
@@ -56,7 +64,8 @@ public class OperationMenu {
 			}
 		}
 
-		private void updateOp() {   
+		/** @author 이규철 **/
+		private void updateOp() {    // 수술 일정 업데이트 컨트롤 호출
 			System.out.print("환자의 이름을 입력하세요: ");
 			sc.nextLine();
 			String patientName = sc.nextLine();
@@ -66,7 +75,7 @@ public class OperationMenu {
 			String date = sc.nextLine();
 			System.out.print("바뀐 수술 날짜를 입력하세요 : ex(1997-05-29 01:30:22)");
 			String newDate = sc.nextLine();
-			int result = oc.updateOp(patientName,patientNo,date,newDate);
+			int result = oc.updateOp(patientName,patientNo,date,newDate);  // 환자 이름, 주민번호, 수술 날짜, 바뀌고 싶은 날짜
 			if(result>0) {
 				System.out.println("업데이트 성공");
 			}else {
@@ -74,7 +83,8 @@ public class OperationMenu {
 			}
 		}
 
-		private void writeOp() {
+		/** @author 이규철 **/
+		private void writeOp() {   // 수술 일정 작성 컨트롤 호출
 			sc.nextLine();
 			System.out.print("날짜를 입력하세요 : ex(1997-05-29 01:30:22) ");
 			String date = sc.nextLine();
@@ -86,7 +96,7 @@ public class OperationMenu {
 			String doctorName = sc.nextLine();
 			System.out.print("환자의 이름을 입력하세요 : ");
 			String patientName = sc.nextLine();
-			int result = oc.writeOp(date,uniqueness,op_name,doctorName,patientName);
+			int result = oc.writeOp(date,uniqueness,op_name,doctorName,patientName); //날짜,특이사항,수술 명, 의사 이름, 환자 이름을 받습니다.
 			if(result>0) {
 				System.out.println("작성 완료");
 			}else {
@@ -94,14 +104,16 @@ public class OperationMenu {
 			}
 		}
 
-		private void searchOp() {
+		/** @author 이규철 **/
+		private void searchOp() {   // 수술 일정 열람 컨트롤 호출 
 			System.out.print("환자 이름을 입력하세요 : ");
 			sc.nextLine();
 			String patientName = sc.nextLine();
 			System.out.print("주민 번호를 입력하세요 : ");
 			String patientNo = sc.nextLine();
-			List<OperationDTO> orr = oc.searchOp(patientName,patientNo);
+			List<OperationDTO> orr = oc.searchOp(patientName,patientNo);  // 환자 이름, 환자 주민 번호를 입력 받습니다.
+			if(orr != null) {
 			for(int i = 0;i<orr.size();i++) 
 			System.out.println(orr.get(i).toString());
-		}
+		}}
 	}
